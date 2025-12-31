@@ -1,0 +1,52 @@
+---
+interface Props {
+	type: 'WebSite' | 'Blog' | 'Article';
+	data: any;
+}
+
+const { type, data } = Astro.props;
+
+const schemas = {
+	WebSite: {
+		'@context': 'https://schema.org',
+		'@type': 'WebSite',
+		name: data.name,
+		url: data.url,
+		description: data.description,
+		potentialAction: {
+			'@type': 'SearchAction',
+			target: `${data.url}/?s={search_term_string}`,
+			'query-input': 'required name=search_term_string',
+		},
+	},
+	Blog: {
+		'@context': 'https://schema.org',
+		'@type': 'Blog',
+		name: data.name,
+		description: data.description,
+		url: data.url,
+		author: {
+			'@type': 'Person',
+			name: data.author,
+		},
+	},
+	Article: {
+		'@context': 'https://schema.org',
+		'@type': 'Article',
+		headline: data.headline,
+		description: data.description,
+		image: data.image,
+		author: {
+			'@type': 'Person',
+			name: data.author,
+		},
+		datePublished: data.datePublished,
+		dateModified: data.dateModified,
+		url: data.url,
+	},
+};
+
+const schema = schemas[type];
+---
+
+<script set:html={JSON.stringify(schema)} type="application/ld+json" />

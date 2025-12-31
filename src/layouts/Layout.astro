@@ -1,0 +1,79 @@
+---
+import '../styles/global.css';
+
+interface Props {
+	title?: string;
+	description?: string;
+	image?: string;
+	permalink?: string;
+	type?: 'website' | 'article';
+}
+
+const {
+	title = 'Ghozi Fidaul',
+	description = 'Personal site of Ghozi Fidaul, a software engineer building modern web applications with clean code and creative solutions.',
+	image = '/og-image.jpg',
+	permalink = new URL(Astro.url.pathname, Astro.site).href,
+	type = 'website',
+} = Astro.props;
+
+const siteTitle = 'Ghozi Fidaul';
+const pageTitle = title === siteTitle ? title : `${title} | ${siteTitle}`;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<link rel="canonical" href={canonicalURL} />
+		<link rel="sitemap" href="/sitemap-index.xml" />
+		
+		<meta name="description" content={description} />
+		<meta name="author" content="Ghozi Fidaul" />
+		<meta name="keywords" content="Ghozi Fidaul, software engineer, web development, programming, portfolio, blog" />
+		<meta name="robots" content="index, follow" />
+		
+		<meta property="og:title" content={pageTitle} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={new URL(image, Astro.site)} />
+		<meta property="og:url" content={canonicalURL} />
+		<meta property="og:type" content={type} />
+		<meta property="og:site_name" content={siteTitle} />
+		
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={pageTitle} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={new URL(image, Astro.site)} />
+		
+		<title>{pageTitle}</title>
+		
+		<script is:inline>
+			const theme = localStorage.getItem('theme');
+			if (theme) {
+				document.documentElement.classList.add(theme);
+			} else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+				document.documentElement.classList.add('dark');
+			}
+		</script>
+	</head>
+	<body class="min-h-screen">
+		<slot />
+		<script is:inline>
+			function toggleTheme() {
+				const html = document.documentElement;
+				if (html.classList.contains('dark')) {
+					html.classList.remove('dark');
+					localStorage.setItem('theme', 'light');
+				} else {
+					html.classList.add('dark');
+					localStorage.setItem('theme', 'dark');
+				}
+			}
+			window.toggleTheme = toggleTheme;
+		</script>
+	</body>
+</html>
