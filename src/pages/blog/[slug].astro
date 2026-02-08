@@ -1,6 +1,5 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import ThemeToggle from '../../components/ThemeToggle.astro';
 import StructuredData from '../../components/seo/StructuredData.astro';
 import { getCollection } from 'astro:content';
 
@@ -35,13 +34,6 @@ const canonicalURL = new URL(`/blog/${post.slug}`, Astro.site).href;
 			url: canonicalURL,
 		}}
 	/>
-	<ThemeToggle />
-	<nav class="container mx-auto px-4 py-4 max-w-4xl">
-		<ul class="flex gap-6">
-			<li><a href="/" class="text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-neutral-50 transition-colors">Home</a></li>
-			<li><a href="/blog" class="text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-neutral-50 transition-colors">Blog</a></li>
-		</ul>
-	</nav>
 	<main class="container mx-auto px-4 py-8 max-w-4xl">
 		<article class="py-12 blog-post">
 			<a href="/blog" class="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-50 transition-colors mb-8 inline-block">

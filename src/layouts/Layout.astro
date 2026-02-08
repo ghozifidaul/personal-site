@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import Navbar from '../components/Navbar.astro';
 
 interface Props {
 	title?: string;
@@ -61,6 +62,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
 		</script>
 	</head>
 	<body class="min-h-screen">
+		<Navbar />
 		<slot />
 		<script is:inline>
 			function toggleTheme() {

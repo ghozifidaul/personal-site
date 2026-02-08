@@ -1,9 +1,13 @@
 ---
+import ThemeToggle from './ThemeToggle.astro';
 ---
 
-<nav class="container mx-auto px-4 py-4 max-w-4xl">
-	<ul class="flex gap-6">
-		<li><a href="/" class="text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-neutral-50 transition-colors">Home</a></li>
-		<li><a href="/blog" class="text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-neutral-50 transition-colors">Blog</a></li>
-	</ul>
-</nav>
+<header class="sticky top-0 z-50 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md border-b border-neutral-200/50 dark:border-neutral-800/50">
+	<nav class="container mx-auto px-4 py-4 max-w-4xl flex justify-between items-center">
+		<ul class="flex gap-6">
+			<li><a href="/" class="text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-neutral-50 transition-colors">Home</a></li>
+			<li><a href="/blog" class="text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-neutral-50 transition-colors">Blog</a></li>
+		</ul>
+		<ThemeToggle />
+	</nav>
+</header>
