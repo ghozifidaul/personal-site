@@ -1,0 +1,63 @@
+---
+import type { Experience } from '../types/experience';
+
+interface Props {
+	experience: Experience;
+	index: number;
+}
+
+const { experience, index } = Astro.props;
+---
+
+<div
+	class="border border-neutral-300 dark:border-neutral-700 p-6 rounded-lg hover:border-neutral-500 dark:hover:border-neutral-500 transition-all hover:scale-105 hover:shadow-lg experience-card"
+	style={`animation-delay: ${0.5 + index * 0.1}s`}
+>
+	<div
+		class="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4"
+	>
+		<div>
+			<h3 class="text-xl font-bold mb-1 text-neutral-900 dark:text-neutral-50">
+				{experience.title}
+			</h3>
+			<p class="text-neutral-600 dark:text-neutral-400">
+				{experience.company}
+			</p>
+		</div>
+		<span
+			class="text-sm text-neutral-600 dark:text-neutral-400 whitespace-nowrap"
+		>
+			{experience.period}
+		</span>
+	</div>
+	<p class="text-neutral-700 dark:text-neutral-300 mb-4">
+		{experience.description}
+	</p>
+	<div class="flex flex-wrap gap-2">
+		{
+			experience.tags.map((tag) => (
+				<span class="px-3 py-1 text-xs border border-neutral-300 dark:border-neutral-700 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-800 transition-colors">
+					{tag}
+				</span>
+			))
+		}
+	</div>
+</div>
+
+<style>
+	.experience-card {
+		opacity: 0;
+		animation: fade-in 0.8s ease-out forwards;
+	}
+
+	@keyframes fade-in {
+		from {
+			opacity: 0;
+			transform: translateY(30px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+</style>

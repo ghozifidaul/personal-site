@@ -4,6 +4,8 @@ import ThemeToggle from '../components/ThemeToggle.astro';
 import Hero from '../components/Hero.astro';
 import Navbar from '../components/Navbar.astro';
 import StructuredData from '../components/seo/StructuredData.astro';
+import ExperienceCard from '../components/ExperienceCard.astro';
+import { experiences } from '../data/experience';
 ---
 
 <Layout
@@ -54,60 +56,9 @@ import StructuredData from '../components/seo/StructuredData.astro';
 				<span class="border-b-4 border-neutral-900 dark:border-neutral-50">Work Experience</span>
 			</h2>
 			<div class="space-y-8">
-				<div class="border border-neutral-300 dark:border-neutral-700 p-6 rounded-lg hover:border-neutral-500 dark:hover:border-neutral-500 transition-all hover:scale-105 hover:shadow-lg experience-card">
-					<div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
-						<div>
-							<h3 class="text-xl font-bold mb-1 text-neutral-900 dark:text-neutral-50">Senior Software Engineer</h3>
-							<p class="text-neutral-600 dark:text-neutral-400">Tech Company Inc.</p>
-						</div>
-						<span class="text-sm text-neutral-600 dark:text-neutral-400 whitespace-nowrap">2022 - Present</span>
-					</div>
-					<p class="text-neutral-700 dark:text-neutral-300 mb-4">
-						Leading a team of 5 engineers building scalable microservices architecture. Improved system performance by 40% and implemented CI/CD pipelines for automated deployments.
-					</p>
-					<div class="flex flex-wrap gap-2">
-						<span class="px-3 py-1 text-xs border border-neutral-300 dark:border-neutral-700 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-800 transition-colors">TypeScript</span>
-						<span class="px-3 py-1 text-xs border border-neutral-300 dark:border-neutral-700 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-800 transition-colors">Node.js</span>
-						<span class="px-3 py-1 text-xs border border-neutral-300 dark:border-neutral-700 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-800 transition-colors">AWS</span>
-						<span class="px-3 py-1 text-xs border border-neutral-300 dark:border-neutral-700 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-800 transition-colors">Kubernetes</span>
-					</div>
-				</div>
-				<div class="border border-neutral-300 dark:border-neutral-700 p-6 rounded-lg hover:border-neutral-500 dark:hover:border-neutral-500 transition-all hover:scale-105 hover:shadow-lg experience-card">
-					<div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
-						<div>
-							<h3 class="text-xl font-bold mb-1 text-neutral-900 dark:text-neutral-50">Software Engineer</h3>
-							<p class="text-neutral-600 dark:text-neutral-400">Digital Solutions Ltd.</p>
-						</div>
-						<span class="text-sm text-neutral-600 dark:text-neutral-400 whitespace-nowrap">2020 - 2022</span>
-					</div>
-					<p class="text-neutral-700 dark:text-neutral-300 mb-4">
-						Developed full-stack web applications serving 100k+ users. Built real-time features using WebSockets and implemented responsive designs with React and Tailwind CSS.
-					</p>
-					<div class="flex flex-wrap gap-2">
-						<span class="px-3 py-1 text-xs border border-neutral-300 dark:border-neutral-700 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-800 transition-colors">React</span>
-						<span class="px-3 py-1 text-xs border border-neutral-300 dark:border-neutral-700 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-800 transition-colors">Python</span>
-						<span class="px-3 py-1 text-xs border border-neutral-300 dark:border-neutral-700 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-800 transition-colors">PostgreSQL</span>
-						<span class="px-3 py-1 text-xs border border-neutral-300 dark:border-neutral-700 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-800 transition-colors">Docker</span>
-					</div>
-				</div>
-				<div class="border border-neutral-300 dark:border-neutral-700 p-6 rounded-lg hover:border-neutral-500 dark:hover:border-neutral-500 transition-all hover:scale-105 hover:shadow-lg experience-card">
-					<div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
-						<div>
-							<h3 class="text-xl font-bold mb-1 text-neutral-900 dark:text-neutral-50">Junior Developer</h3>
-							<p class="text-neutral-600 dark:text-neutral-400">StartUp Corp</p>
-						</div>
-						<span class="text-sm text-neutral-600 dark:text-neutral-400 whitespace-nowrap">2018 - 2020</span>
-					</div>
-					<p class="text-neutral-700 dark:text-neutral-300 mb-4">
-						Contributed to various client projects, learning modern web development practices. Built RESTful APIs and integrated third-party services. Participated in code reviews and agile development processes.
-					</p>
-					<div class="flex flex-wrap gap-2">
-						<span class="px-3 py-1 text-xs border border-neutral-300 dark:border-neutral-700 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-800 transition-colors">JavaScript</span>
-						<span class="px-3 py-1 text-xs border border-neutral-300 dark:border-neutral-700 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-800 transition-colors">Vue.js</span>
-						<span class="px-3 py-1 text-xs border border-neutral-300 dark:border-neutral-700 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-800 transition-colors">MongoDB</span>
-						<span class="px-3 py-1 text-xs border border-neutral-300 dark:border-neutral-700 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-800 transition-colors">Express</span>
-					</div>
-				</div>
+				{experiences.map((exp, index) => (
+					<ExperienceCard experience={exp} index={index} />
+				))}
 			</div>
 		</section>
 
@@ -162,7 +113,5 @@ import StructuredData from '../components/seo/StructuredData.astro';
 			transform: translateY(0);
 		}
 	}
-	.experience-card:nth-child(1) { animation: fade-in 0.8s ease-out 0.5s both; }
-	.experience-card:nth-child(2) { animation: fade-in 0.8s ease-out 0.6s both; }
-	.experience-card:nth-child(3) { animation: fade-in 0.8s ease-out 0.7s both; }
+
 </style>
