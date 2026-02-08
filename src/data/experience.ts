@@ -2,27 +2,57 @@ import type { Experience } from '../types/experience';
 
 export const experiences: Experience[] = [
 	{
-		title: 'Senior Software Engineer',
-		company: 'Tech Company Inc.',
-		period: '2022 - Present',
-		description:
-			'Leading a team of 5 engineers building scalable microservices architecture. Improved system performance by 40% and implemented CI/CD pipelines for automated deployments.',
-		tags: ['TypeScript', 'Node.js', 'AWS', 'Kubernetes'],
+		title: 'AI Product Engineer',
+		company: 'DigitSense — AI Product Studio (Hong Kong, Remote)',
+		period: 'Mar 2025 -- Present',
+		highlights: [
+			'Architected and deployed an AI Education Assistant using Azure OpenAI, streamlining learning workflows for students with disabilities using Python for LLM integration, Next.js for backend and frontend, and Radix UI.',
+			'Engineered custom Speech-to-Text (STT) and Text-to-Speech (TTS) pipelines on Azure to enable seamless voice-controlled interactions.',
+			'Optimized LLM performance through prompt engineering and latency tuning, resulting in faster and more accurate tutoring.',
+			'Developed an SEO-optimized marketing site and infrastructure on AWS, increasing organic reach for an AI meeting tools company.',
+		],
+		tags: ['Azure OpenAI', 'Python', 'Next.js', 'Radix UI', 'STT/TTS', 'AWS'],
 	},
 	{
-		title: 'Software Engineer',
-		company: 'Digital Solutions Ltd.',
-		period: '2020 - 2022',
-		description:
-			'Developed full-stack web applications serving 100k+ users. Built real-time features using WebSockets and implemented responsive designs with React and Tailwind CSS.',
-		tags: ['React', 'Python', 'PostgreSQL', 'Docker'],
+		title: 'Front End & Mobile App Developer',
+		company: 'DigitSense — AI Product Studio (Hong Kong, Remote)',
+		period: 'Jun 2023 -- Mar 2025',
+		highlights: [
+			"Modernized a global fashion brand's legacy sales portal using Next.js and Tailwind CSS, improving UI accessibility for senior users.",
+			"Boosted Core Web Vitals for the agency's primary marketing site, enhancing site speed and search rankings.",
+			'Developed a high-conversion Shopify App using interactive React components to improve retention and sales for apparel clients.',
+			'Designed and implemented scalable APIs for high-traffic retail apps, ensuring 99.9% uptime during peak sales periods.',
+		],
+		tags: ['Next.js', 'Tailwind CSS', 'React', 'Shopify', 'API Design'],
 	},
 	{
-		title: 'Junior Developer',
-		company: 'StartUp Corp',
-		period: '2018 - 2020',
-		description:
-			'Contributed to various client projects, learning modern web development practices. Built RESTful APIs and integrated third-party services. Participated in code reviews and agile development processes.',
-		tags: ['JavaScript', 'Vue.js', 'MongoDB', 'Express'],
+		title: 'Mobile App Developer',
+		company: 'DigitSense — AI Product Studio (Hong Kong, Remote)',
+		period: 'Aug 2022 -- Jun 2023',
+		highlights: [
+			'Built an assistive mobile app (iOS/Android) for visually impaired users in Singapore using React Native.',
+			'Integrated spatial audio and Google Maps API to provide real-time voice-controlled navigation.',
+		],
+		tags: ['React Native', 'iOS', 'Android', 'Google Maps API'],
+	},
+	{
+		title: 'Mobile App Developer',
+		company: 'PT Inovasi Cipta Teknologi (Subsidiary of a Major Sharia Bank, Indonesia)',
+		period: 'Jun 2020 -- Aug 2022',
+		highlights: [
+			'Developed and published 20+ cross-platform apps integrated with banking APIs using Flutter.',
+			'Managed the full mobile development lifecycle from UI/UX implementation to App Store & Play Store releases for 20+ clients.',
+		],
+		tags: ['Flutter', 'Banking APIs', 'App Store', 'Play Store'],
+	},
+	{
+		title: 'Mobile App Developer',
+		company: 'Sultan Agung Islamic University (Indonesia)',
+		period: 'Aug 2019 -- Aug 2022',
+		highlights: [
+			'Increased employee attendance by 20% by building a location-based attendance system with Flutter and a Laravel backend supporting 1,000+ active users.',
+			'Built a high-performance web app with a Major Recommendation engine to help high school students choose university programs.',
+		],
+		tags: ['Flutter', 'Laravel', 'Location Services'],
 	},
 ];

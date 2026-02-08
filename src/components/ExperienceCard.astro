@@ -30,9 +30,11 @@ const { experience, index } = Astro.props;
 			{experience.period}
 		</span>
 	</div>
-	<p class="text-neutral-700 dark:text-neutral-300 mb-4">
-		{experience.description}
-	</p>
+	<ul class="list-disc list-inside space-y-2 text-neutral-700 dark:text-neutral-300 mb-4">
+		{experience.highlights.map((highlight) => (
+			<li>{highlight}</li>
+		))}
+	</ul>
 	<div class="flex flex-wrap gap-2">
 		{
 			experience.tags.map((tag) => (
