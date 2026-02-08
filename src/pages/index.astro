@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import ThemeToggle from '../components/ThemeToggle.astro';
 import Hero from '../components/Hero.astro';
+import Navbar from '../components/Navbar.astro';
 import StructuredData from '../components/seo/StructuredData.astro';
 ---
 
@@ -18,12 +19,7 @@ import StructuredData from '../components/seo/StructuredData.astro';
 		}}
 	/>
 	<ThemeToggle />
-	<nav class="container mx-auto px-4 py-4 max-w-4xl">
-		<ul class="flex gap-6">
-			<li><a href="/" class="text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-neutral-50 transition-colors">Home</a></li>
-			<li><a href="/blog" class="text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-neutral-50 transition-colors">Blog</a></li>
-		</ul>
-	</nav>
+	<Navbar />
 	<main class="container mx-auto px-4 py-8 max-w-4xl">
 		<Hero />
 
