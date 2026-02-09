@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig, envField } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import react from '@astrojs/react';
 
@@ -11,5 +11,10 @@ export default defineConfig({
   integrations: [sitemap(), react()],
   vite: {
     plugins: [tailwindcss()]
+  },
+  env: {
+    schema: {
+      API_URL: envField.string({ context: "client", access: "public", default: "http://localhost:8787/chat" })
+    }
   }
 });
