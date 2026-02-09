@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import StructuredData from '../components/seo/StructuredData.astro';
 import ExperienceCard from '../components/ExperienceCard.astro';
+import AskAI from '../components/AskAI.tsx';
 import { experiences } from '../data/experience';
 ---
 
@@ -82,6 +83,8 @@ import { experiences } from '../data/experience';
 				</div>
 			</div>
 		</section>
+
+		<AskAI client:load />
 
 		<footer class="py-8 border-t border-neutral-200 dark:border-neutral-800 text-center text-neutral-600 dark:text-neutral-400">
 			<p>&copy; 2025. Built with Astro, Tailwind, and Framer Motion.</p>
