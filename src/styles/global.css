@@ -37,8 +37,10 @@ body {
   * {
     @apply border-neutral-200;
   }
-  
+
   .dark * {
     @apply border-neutral-800;
   }
 }
+
+

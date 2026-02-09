@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import Navbar from '../components/Navbar.astro';
+import CursorFollower from '../components/CursorFollower.tsx';
 
 interface Props {
 	title?: string;
@@ -62,6 +63,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
 		</script>
 	</head>
 	<body class="min-h-screen">
+		<CursorFollower client:only="react" />
 		<Navbar />
 		<slot />
 		<script is:inline>
