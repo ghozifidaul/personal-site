@@ -8,8 +8,8 @@ import type { ChatMessage } from '../types/chat';
 
 const STORAGE_KEY = 'ask-ai-messages';
 const MAX_MESSAGES = 50;
-// const API_URL = 'https://personal-site-be.ghozifidaul.workers.dev/chat'
-const API_URL = 'http://localhost:8787/chat'
+const API_URL = 'https://personal-site-be.ghozifidaul.workers.dev/chat'
+// const API_URL = 'http://localhost:8787/chat'
 
 const WELCOME_MESSAGE: ChatMessage = {
 	role: 'assistant',
