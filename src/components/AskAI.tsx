@@ -8,7 +8,8 @@ import type { ChatMessage } from '../types/chat';
 
 const STORAGE_KEY = 'ask-ai-messages';
 const MAX_MESSAGES = 50;
-const API_URL = 'https://personal-site-be.ghozifidaul.workers.dev/chat'
+// const API_URL = 'https://personal-site-be.ghozifidaul.workers.dev/chat'
+const API_URL = 'http://localhost:8787/chat'
 
 const WELCOME_MESSAGE: ChatMessage = {
 	role: 'assistant',
@@ -157,6 +158,7 @@ export default function AskAI() {
 						role: role,
 						content,
 					})),
+					stream: true,
 				}),
 			});
 
@@ -164,18 +166,99 @@ export default function AskAI() {
 				throw new Error('Failed to get response');
 			}
 
-			const data = await response.json();
+			const reader = response.body?.getReader();
+			if (!reader) {
+				throw new Error('Response body is not readable');
+			}
 
-			const assistantMessage: ChatMessage = {
-				role: 'assistant',
-				content: data.response,
-				timestamp: Date.now(),
-			};
+			const decoder = new TextDecoder();
+			let buffer = '';
+			let assistantContent = '';
+			let hasReceivedContent = false;
 
-			setMessages((prev) => [...prev, assistantMessage]);
+			try {
+				while (true) {
+					const { done, value } = await reader.read();
+					if (done) break;
+
+					buffer += decoder.decode(value, { stream: true });
+
+					while (true) {
+						const lineEnd = buffer.indexOf('\n');
+						if (lineEnd === -1) break;
+
+						const line = buffer.slice(0, lineEnd).trim();
+						buffer = buffer.slice(lineEnd + 1);
+
+						if (line.startsWith('data: ')) {
+							const data = line.slice(6);
+							if (data === '[DONE]') {
+								reader.cancel();
+								break;
+							}
+
+							try {
+								const parsed = JSON.parse(data);
+
+								if (parsed.error) {
+									assistantContent += `\n\nError: ${parsed.error.message}`;
+									setMessages((prev) => {
+										const updated = [...prev];
+										const lastMessage = updated[updated.length - 1];
+										if (lastMessage?.role === 'assistant') {
+											lastMessage.content = assistantContent;
+										}
+										return updated;
+									});
+									reader.cancel();
+									break;
+								}
+
+								if (parsed.content) {
+									if (!hasReceivedContent) {
+										hasReceivedContent = true;
+										setIsLoading(false);
+										const assistantMessage: ChatMessage = {
+											role: 'assistant',
+											content: parsed.content,
+											timestamp: Date.now(),
+											isStreaming: true,
+										};
+										setMessages((prev) => [...prev, assistantMessage]);
+										assistantContent = parsed.content;
+									} else {
+										assistantContent += parsed.content;
+										setMessages((prev) => {
+											const updated = [...prev];
+											const lastMessage = updated[updated.length - 1];
+											if (lastMessage?.role === 'assistant') {
+												lastMessage.content = assistantContent;
+											}
+											return updated;
+										});
+									}
+								}
+							} catch {
+								// Ignore invalid JSON
+							}
+						}
+					}
+				}
+			} finally {
+				reader.cancel();
+				// Mark streaming as complete
+				setMessages((prev) => {
+					const updated = [...prev];
+					const lastMessage = updated[updated.length - 1];
+					if (lastMessage?.role === 'assistant') {
+						delete (lastMessage as ChatMessage & { isStreaming?: boolean }).isStreaming;
+					}
+					return updated;
+				});
+				setIsLoading(false);
+			}
 		} catch (err) {
 			setError('Sorry, I am unable to respond at the moment. Please try again later.');
-		} finally {
 			setIsLoading(false);
 		}
 	};
@@ -302,12 +385,18 @@ export default function AskAI() {
 													</p>
 												) : (
 													<div className="prose prose-sm dark:prose-invert max-w-none prose-neutral">
-														<ReactMarkdown
-															remarkPlugins={[remarkGfm]}
-															components={markdownComponents}
-														>
-															{message.content}
-														</ReactMarkdown>
+														{(message as ChatMessage & { isStreaming?: boolean }).isStreaming ? (
+															<p className="text-sm leading-relaxed whitespace-pre-wrap">
+																{message.content}
+															</p>
+														) : (
+															<ReactMarkdown
+																remarkPlugins={[remarkGfm]}
+																components={markdownComponents}
+															>
+																{message.content}
+															</ReactMarkdown>
+														)}
 													</div>
 												)}
 												<span
