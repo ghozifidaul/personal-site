@@ -154,7 +154,7 @@ export default function AskAI() {
 				},
 				body: JSON.stringify({
 					messages: [...messages, userMessage].map(({ role, content }) => ({
-						role: role === 'assistant' ? 'model' : role,
+						role: role,
 						content,
 					})),
 				}),
