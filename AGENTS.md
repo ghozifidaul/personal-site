@@ -8,7 +8,7 @@ This document provides guidelines for AI agents working on this Astro-based pers
 - **Language**: TypeScript (strict mode)
 - **Styling**: Tailwind CSS 4.x with custom theme
 - **Package Manager**: Bun
-- **Features**: Dark mode, content collections (blog), SEO, animations
+- **Features**: Dark mode, content collections (blog), SEO, animations, AI chat
 
 ## Build Commands
 
@@ -48,32 +48,52 @@ const {
 ---
 ```
 
+### React Components (.tsx)
+
+- **Indentation**: 2 spaces
+- **Quote style**: Single quotes
+- **Semicolons**: Required
+- **Use functional components** with hooks
+- **Client directives**: Add `client:only="react"` or `client:load` when using in Astro
+
+```tsx
+import { useState } from 'react';
+
+export default function Component() {
+  const [count, setCount] = useState(0);
+  return <button onClick={() => setCount(c => c + 1)}>{count}</button>;
+}
+```
+
 ### Naming Conventions
 
-- **Components**: PascalCase (e.g., `Hero.astro`, `ThemeToggle.astro`)
+- **Components**: PascalCase (e.g., `Hero.astro`, `AskAI.tsx`)
 - **Layouts**: PascalCase (e.g., `Layout.astro`)
 - **Pages**: lowercase (e.g., `index.astro`, `[slug].astro`)
-- **Collections**: lowercase (e.g., `blog/`)
+- **Types**: PascalCase with `.ts` extension (e.g., `experience.ts`)
+- **Collections**: lowercase directory (e.g., `blog/`)
 - **CSS classes**: lowercase with hyphens (e.g., `hero-section`)
 
 ### Imports
 
-- Use relative paths with `.astro` extension
-- Group imports: Astro core → third-party → local
+- Use relative paths with extensions (`.astro`, `.tsx`, `.ts`)
+- Group imports: Astro/React core → third-party → local types → local components
 
 ```astro
 ---
-import Layout from '../layouts/Layout.astro';
-import { getCollection } from 'astro:content';
+import { useState } from 'react';
+import { motion } from 'framer-motion';
+import type { Experience } from '../types/experience';
 import Hero from '../components/Hero.astro';
 ---
 ```
 
-### Styling with Tailwind
+### Styling with Tailwind v4
 
-- Use `neutral` color palette exclusively
+- Use `neutral` color palette exclusively (defined in `global.css`)
 - Support dark mode with `dark:` prefix
-- Custom animations in `<style>` blocks
+- Custom theme colors defined in `@theme` block in `global.css`
+- Custom animations in `<style>` blocks for complex keyframes
 - Container max-width: `max-w-4xl`
 
 ```html
@@ -85,14 +105,15 @@ import Hero from '../components/Hero.astro';
 - Toggle via `window.toggleTheme()` (defined in Layout)
 - Class-based: `dark` class on `<html>`
 - Always provide both light and dark variants
+- Custom variant defined: `@custom-variant dark (&:where(.dark, .dark *));`
 
-### Component Structure
+### Component Structure (Astro)
 
 ```astro
 ---
-// 1. Imports
+// 1. Imports (CSS → components)
 // 2. Props interface
-// 3. Props destructuring
+// 3. Props destructuring with defaults
 // 4. Component logic
 ---
 
@@ -105,35 +126,58 @@ import Hero from '../components/Hero.astro';
 
 ### Content Collections
 
-- Define schema in `src/content.config.ts`
+- Define schema in `src/content.config.ts` (not in content/ folder)
 - Use Zod for validation
-- Access via `getCollection()`
+- Access via `getCollection()` from `astro:content`
+
+```ts
+import { defineCollection, z } from 'astro:content';
+
+const blog = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    date: z.coerce.date(),
+    tags: z.array(z.string()).default([]),
+  }),
+});
+```
 
 ### Error Handling
 
-- Use TypeScript strict mode
+- TypeScript strict mode enabled (extends `astro/tsconfigs/strict`)
 - Validate props with defaults
 - Handle missing data gracefully with fallbacks
+- Use try/catch for localStorage operations
 
 ### SEO
 
 - Use `StructuredData` component for JSON-LD
-- Include meta tags in Layout
+- Meta tags defined in Layout.astro
 - Canonical URLs via `Astro.site`
+- Open Graph and Twitter card meta tags included
+
+### Environment Variables
+
+- Define schema in `astro.config.mjs` using `envField`
+- Access via `import.meta.env.API_URL`
+- Supports `client` and `server` contexts
 
 ### Testing
 
-Currently no test framework configured. Add tests in `tests/` directory if needed.
+No test framework configured. Add tests in `tests/` directory if needed.
 
 ## Project Structure
 
 ```
 src/
-  components/      # Reusable components (PascalCase)
+  components/      # Reusable components (PascalCase .astro/.tsx)
   layouts/         # Page layouts
   pages/           # Routes
   content/         # Blog posts (Markdown)
-  styles/          # Global CSS
+  types/           # TypeScript type definitions
+  data/            # Static data files
+  styles/          # Global CSS (Tailwind config)
 public/            # Static assets
 ```
 
@@ -141,9 +185,11 @@ public/            # Static assets
 
 - astro
 - @astrojs/sitemap
+- @astrojs/react
 - @tailwindcss/vite
-- tailwindcss
-- framer-motion (for animations)
+- tailwindcss v4
+- framer-motion (animations)
+- react-markdown (chat messages)
 
 ## Notes
 
