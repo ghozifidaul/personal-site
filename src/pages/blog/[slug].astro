@@ -15,11 +15,13 @@ const post = Astro.props.post as any;
 const { Content } = await post.render();
 const data = post.data;
 const canonicalURL = new URL(`/blog/${post.slug}`, Astro.site).href;
+const blogImage = data.image ? `/images/${data.image}` : '/ss-personal-site.webp';
 ---
 
 <Layout
 	title={data.title}
 	description={data.description}
+	image={blogImage}
 	type="article"
 >
 	<StructuredData
@@ -27,7 +29,7 @@ const canonicalURL = new URL(`/blog/${post.slug}`, Astro.site).href;
 		data={{
 			headline: data.title,
 			description: data.description,
-			image: new URL('/og-image.jpg', Astro.site),
+			image: new URL(blogImage, Astro.site),
 			author: 'Ghozi Fidaul',
 			datePublished: data.date.toISOString(),
 			dateModified: data.date.toISOString(),
@@ -39,6 +41,14 @@ const canonicalURL = new URL(`/blog/${post.slug}`, Astro.site).href;
 			<a href="/blog" class="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-50 transition-colors mb-8 inline-block">
 				← Back to Blog
 			</a>
+
+			{data.image && (
+				<img
+					src={`/images/${data.image}`}
+					alt={data.title}
+					class="w-full rounded-lg mb-8 object-cover max-h-[400px]"
+				/>
+			)}
 
 			<header class="mb-8">
 				<h1 class="text-4xl md:text-6xl font-bold mb-4 text-neutral-900 dark:text-neutral-50">
