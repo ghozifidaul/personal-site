@@ -137,8 +137,10 @@ const blog = defineCollection({
   type: 'content',
   schema: z.object({
     title: z.string(),
+    description: z.string(),
     date: z.coerce.date(),
     tags: z.array(z.string()).default([]),
+    image: z.string().optional(), // Path relative to public/images/
   }),
 });
 ```
@@ -156,6 +158,7 @@ const blog = defineCollection({
 - Meta tags defined in Layout.astro
 - Canonical URLs via `Astro.site`
 - Open Graph and Twitter card meta tags included
+- Blog images automatically included in SEO metadata (og:image, twitter:image, JSON-LD)
 
 ### Environment Variables
 
@@ -190,6 +193,14 @@ public/            # Static assets
 - tailwindcss v4
 - framer-motion (animations)
 - react-markdown (chat messages)
+
+### Blog Images
+
+- Store images in `public/images/blog/` directory
+- Reference in frontmatter: `image: "blog/filename.webp"`
+- Images are optional - posts without images use default site screenshot
+- Images displayed above post title with responsive sizing
+- Automatically included in social media previews and SEO metadata
 
 ## Notes
 
