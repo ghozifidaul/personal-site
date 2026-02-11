@@ -3,6 +3,7 @@ title: "Getting Started with Astro"
 description: "An introduction to building modern websites with Astro"
 date: 2025-01-15
 tags: ["astro", "web development", "tutorial"]
+image: "blog/placeholder.webp"
 ---
 
 Astro is a modern web framework that helps you build faster, content-focused websites. It's designed to reduce JavaScript by default and deliver lightning-fast performance.
