@@ -178,8 +178,6 @@ Or use the Astro environment variables defined in `astro.config.mjs`.
 
 This site is built as a static site and can be deployed to any static hosting platform:
 
-- [Vercel](https://vercel.com/)
-- [Netlify](https://www.netlify.com/)
 - [Cloudflare Pages](https://pages.cloudflare.com/)
 - [GitHub Pages](https://pages.github.com/)
 
