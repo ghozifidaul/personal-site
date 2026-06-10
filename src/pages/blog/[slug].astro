@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import StructuredData from '../../components/seo/StructuredData.astro';
+import { ArrowLeft } from '@phosphor-icons/react';
 import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -38,14 +39,17 @@ const blogImage = data.image ? `/images/${data.image}` : '/ss-personal-site.webp
 	/>
 	<main class="mx-auto px-6 max-w-3xl pt-32 pb-24">
 		<article>
-			<a href="/blog" class="text-sm text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-50 transition-colors mb-12 inline-flex items-center gap-1">
-				&larr; Back to Blog
+			<a href="/blog" class="text-sm text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-50 transition-colors focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:outline-none mb-12 inline-flex items-center gap-1.5">
+				<ArrowLeft size={14} />
+				Back to Blog
 			</a>
 
 			{data.image && (
 				<img
 					src={`/images/${data.image}`}
 					alt={data.title}
+					loading="lazy"
+					decoding="async"
 					class="w-full rounded-lg mb-10 object-cover max-h-96"
 				/>
 			)}
@@ -70,7 +74,7 @@ const blogImage = data.image ? `/images/${data.image}` : '/ss-personal-site.webp
 				</div>
 			</header>
 
-			<div class="blog-content">
+			<div class="blog-content text-black dark:text-white">
 				<Content />
 			</div>
 		</article>
@@ -85,11 +89,6 @@ const blogImage = data.image ? `/images/${data.image}` : '/ss-personal-site.webp
 	.blog-content {
 		font-size: 1.0625rem;
 		line-height: 1.75;
-		color: var(--color-neutral-700);
-	}
-
-	.dark .blog-content {
-		color: var(--color-neutral-300);
 	}
 
 	.blog-content :global(h1) {
@@ -97,11 +96,6 @@ const blogImage = data.image ? `/images/${data.image}` : '/ss-personal-site.webp
 		font-weight: 700;
 		margin-top: 2.5rem;
 		margin-bottom: 1rem;
-		color: var(--color-neutral-900);
-	}
-
-	.dark .blog-content :global(h1) {
-		color: var(--color-neutral-50);
 	}
 
 	.blog-content :global(h2) {
@@ -109,11 +103,6 @@ const blogImage = data.image ? `/images/${data.image}` : '/ss-personal-site.webp
 		font-weight: 600;
 		margin-top: 2rem;
 		margin-bottom: 0.75rem;
-		color: var(--color-neutral-900);
-	}
-
-	.dark .blog-content :global(h2) {
-		color: var(--color-neutral-50);
 	}
 
 	.blog-content :global(h3) {
@@ -121,11 +110,6 @@ const blogImage = data.image ? `/images/${data.image}` : '/ss-personal-site.webp
 		font-weight: 600;
 		margin-top: 1.75rem;
 		margin-bottom: 0.5rem;
-		color: var(--color-neutral-900);
-	}
-
-	.dark .blog-content :global(h3) {
-		color: var(--color-neutral-50);
 	}
 
 	.blog-content :global(p) {
@@ -229,11 +213,6 @@ const blogImage = data.image ? `/images/${data.image}` : '/ss-personal-site.webp
 
 	.blog-content :global(strong) {
 		font-weight: 600;
-		color: var(--color-neutral-900);
-	}
-
-	.dark .blog-content :global(strong) {
-		color: var(--color-neutral-50);
 	}
 
 	.blog-content :global(table) {
