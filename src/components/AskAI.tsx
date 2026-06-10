@@ -1,15 +1,14 @@
 import type { ComponentPropsWithoutRef } from 'react';
 import { useEffect, useRef, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import { TrashIcon, XIcon, PaperPlaneRightIcon, CaretDownIcon, ChatCircleIcon } from '@phosphor-icons/react';
 import type { ChatMessage } from '../types/chat';
-// import { API_URL } from 'astro:env/client';
 
 const STORAGE_KEY = 'ask-ai-messages';
 const MAX_MESSAGES = 50;
 const API_URL = 'https://personal-site-be.ghozifidaul.workers.dev/chat'
-// const API_URL = 'http://localhost:8787/chat'
 
 const WELCOME_MESSAGE: ChatMessage = {
   role: 'assistant',
@@ -18,7 +17,6 @@ const WELCOME_MESSAGE: ChatMessage = {
   timestamp: Date.now(),
 };
 
-// Markdown components with neutral styling
 const markdownComponents = {
   p: ({ children }: ComponentPropsWithoutRef<'p'>) => (
     <p className="text-sm leading-relaxed mb-2 last:mb-0">{children}</p>
@@ -88,8 +86,8 @@ export default function AskAI() {
   const contentBufferRef = useRef('');
   const typingIntervalRef = useRef<NodeJS.Timeout | null>(null);
   const isTypingRef = useRef(false);
+  const reduce = useReducedMotion();
 
-  // Load messages from localStorage on mount
   useEffect(() => {
     const stored = localStorage.getItem(STORAGE_KEY);
     if (stored) {
@@ -108,7 +106,6 @@ export default function AskAI() {
     }
   }, []);
 
-  // Save messages to localStorage whenever they change
   useEffect(() => {
     if (messages.length > 0) {
       const trimmed = messages.slice(-MAX_MESSAGES);
@@ -116,12 +113,10 @@ export default function AskAI() {
     }
   }, [messages]);
 
-  // Auto-scroll to bottom when messages change
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, isLoading]);
 
-  // Auto-resize textarea
   useEffect(() => {
     if (textareaRef.current) {
       textareaRef.current.style.height = 'auto';
@@ -129,7 +124,6 @@ export default function AskAI() {
     }
   }, [input]);
 
-  // Focus input when chat opens
   useEffect(() => {
     if (isOpen && textareaRef.current) {
       setTimeout(() => textareaRef.current?.focus(), 100);
@@ -268,7 +262,6 @@ export default function AskAI() {
                   }
                 }
               } catch {
-                // Ignore invalid JSON
               }
             }
           }
@@ -334,25 +327,22 @@ export default function AskAI() {
       <AnimatePresence>
         {isOpen && (
           <>
-            {/* Backdrop */}
             <motion.div
-              initial={{ opacity: 0 }}
+              initial={reduce ? false : { opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               className="fixed inset-0 bg-black/20 dark:bg-black/40 backdrop-blur-sm z-40"
               onClick={() => setIsOpen(false)}
             />
 
-            {/* Chat Window */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              initial={reduce ? false : { opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ duration: 0.2, ease: 'easeOut' }}
               className="absolute bottom-16 right-0 w-[380px] max-w-[calc(100vw-3rem)] z-50"
             >
               <div className="border border-neutral-300 dark:border-neutral-700 rounded-2xl bg-white dark:bg-neutral-900 overflow-hidden shadow-2xl">
-                {/* Header */}
                 <div className="flex items-center justify-between px-4 py-3 border-b border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-950">
                   <div className="flex items-center gap-2">
                     <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
@@ -371,58 +361,33 @@ export default function AskAI() {
                       className="p-2 text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200 transition-colors rounded-lg hover:bg-neutral-200 dark:hover:bg-neutral-800"
                       title="Clear conversation"
                     >
-                      <svg
-                        className="w-4 h-4"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                        />
-                      </svg>
+                      <TrashIcon size={16} />
                     </button>
                     <button
                       onClick={() => setIsOpen(false)}
                       className="p-2 text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200 transition-colors rounded-lg hover:bg-neutral-200 dark:hover:bg-neutral-800"
                       aria-label="Close chat"
                     >
-                      <svg
-                        className="w-4 h-4"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M6 18L18 6M6 6l12 12"
-                        />
-                      </svg>
+                      <XIcon size={16} />
                     </button>
                   </div>
                 </div>
 
-                {/* Messages */}
                 <div className="h-[400px] overflow-y-auto p-4 space-y-4 bg-white dark:bg-neutral-900">
                   {messages.map((message, index) => (
                     <motion.div
                       key={`${message.timestamp}-${index}`}
-                      initial={{ opacity: 0, y: 10 }}
+                      initial={reduce ? false : { opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.2 }}
-                      className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'
-                        }`}
+                      className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
                     >
                       <div
-                        className={`max-w-[90%] ${message.role === 'user'
+                        className={`max-w-[90%] ${
+                          message.role === 'user'
                             ? 'bg-neutral-900 dark:bg-neutral-700 text-neutral-50 rounded-2xl rounded-br-md'
                             : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 rounded-2xl rounded-bl-md'
-                          } px-4 py-3`}
+                        } px-4 py-3`}
                       >
                         {message.role === 'user' ? (
                           <p className="text-sm leading-relaxed whitespace-pre-wrap">
@@ -445,10 +410,11 @@ export default function AskAI() {
                           </div>
                         )}
                         <span
-                          className={`text-xs mt-2 block ${message.role === 'user'
+                          className={`text-xs mt-2 block ${
+                            message.role === 'user'
                               ? 'text-neutral-400'
                               : 'text-neutral-500 dark:text-neutral-400'
-                            }`}
+                          }`}
                         >
                           {formatTime(message.timestamp)}
                         </span>
@@ -456,10 +422,9 @@ export default function AskAI() {
                     </motion.div>
                   ))}
 
-                  {/* Loading indicator */}
                   {isLoading && (
                     <motion.div
-                      initial={{ opacity: 0, y: 10 }}
+                      initial={reduce ? false : { opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       className="flex justify-start"
                     >
@@ -467,37 +432,24 @@ export default function AskAI() {
                         <div className="flex gap-1">
                           <motion.span
                             className="w-2 h-2 rounded-full bg-neutral-400 dark:bg-neutral-500"
-                            animate={{ y: [0, -6, 0] }}
-                            transition={{
-                              repeat: Infinity,
-                              duration: 0.6,
-                              delay: 0,
-                            }}
+                            animate={reduce ? undefined : { y: [0, -6, 0] }}
+                            transition={reduce ? undefined : { repeat: Infinity, duration: 0.6, delay: 0 }}
                           />
                           <motion.span
                             className="w-2 h-2 rounded-full bg-neutral-400 dark:bg-neutral-500"
-                            animate={{ y: [0, -6, 0] }}
-                            transition={{
-                              repeat: Infinity,
-                              duration: 0.6,
-                              delay: 0.15,
-                            }}
+                            animate={reduce ? undefined : { y: [0, -6, 0] }}
+                            transition={reduce ? undefined : { repeat: Infinity, duration: 0.6, delay: 0.15 }}
                           />
                           <motion.span
                             className="w-2 h-2 rounded-full bg-neutral-400 dark:bg-neutral-500"
-                            animate={{ y: [0, -6, 0] }}
-                            transition={{
-                              repeat: Infinity,
-                              duration: 0.6,
-                              delay: 0.3,
-                            }}
+                            animate={reduce ? undefined : { y: [0, -6, 0] }}
+                            transition={reduce ? undefined : { repeat: Infinity, duration: 0.6, delay: 0.3 }}
                           />
                         </div>
                       </div>
                     </motion.div>
                   )}
 
-                  {/* Error message */}
                   {error && (
                     <motion.div
                       initial={{ opacity: 0 }}
@@ -513,7 +465,6 @@ export default function AskAI() {
                   <div ref={messagesEndRef} />
                 </div>
 
-                {/* Input area */}
                 <div className="border-t border-neutral-300 dark:border-neutral-700 p-3 bg-neutral-50 dark:bg-neutral-950">
                   <div className="flex gap-2">
                     <textarea
@@ -529,22 +480,10 @@ export default function AskAI() {
                     <button
                       onClick={handleSend}
                       disabled={!input.trim() || isLoading}
-                      className="bg-neutral-900 dark:bg-neutral-50 text-neutral-50 dark:text-neutral-900 hover:bg-neutral-800 dark:hover:bg-neutral-200 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg px-3 py-2 transition-colors"
+                      className="bg-neutral-900 dark:bg-neutral-50 text-neutral-50 dark:text-neutral-900 hover:bg-neutral-800 dark:hover:bg-neutral-200 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg px-3 py-2 transition-colors flex items-center justify-center"
                       aria-label="Send message"
                     >
-                      <svg
-                        className="w-5 h-5"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M14 5l7 7m0 0l-7 7m7-7H3"
-                        />
-                      </svg>
+                      <PaperPlaneRightIcon size={18} weight="bold" />
                     </button>
                   </div>
                 </div>
@@ -554,60 +493,41 @@ export default function AskAI() {
         )}
       </AnimatePresence>
 
-      {/* Floating Button */}
       <motion.button
         onClick={() => setIsOpen(!isOpen)}
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        className={`relative w-14 h-14 rounded-full shadow-2xl flex items-center justify-center transition-colors z-50 ${isOpen
+        whileHover={reduce ? undefined : { scale: 1.05 }}
+        whileTap={reduce ? undefined : { scale: 0.95 }}
+        className={`relative w-14 h-14 rounded-full shadow-2xl flex items-center justify-center transition-colors z-50 ${
+          isOpen
             ? 'bg-neutral-700 dark:bg-neutral-300 text-neutral-50 dark:text-neutral-900'
             : 'bg-neutral-900 dark:bg-neutral-50 text-neutral-50 dark:text-neutral-900'
-          }`}
+        }`}
         aria-label={isOpen ? 'Close chat' : 'Open chat'}
       >
         <AnimatePresence mode="wait">
           {isOpen ? (
-            <motion.svg
+            <motion.div
               key="close"
-              initial={{ rotate: -90, opacity: 0 }}
+              initial={reduce ? false : { rotate: -90, opacity: 0 }}
               animate={{ rotate: 0, opacity: 1 }}
               exit={{ rotate: 90, opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M19 9l-7 7-7-7"
-              />
-            </motion.svg>
+              <CaretDownIcon size={24} weight="bold" />
+            </motion.div>
           ) : (
-            <motion.svg
+            <motion.div
               key="chat"
-              initial={{ scale: 0.5, opacity: 0 }}
+              initial={reduce ? false : { scale: 0.5, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.5, opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
-              />
-            </motion.svg>
+              <ChatCircleIcon size={24} weight="bold" />
+            </motion.div>
           )}
         </AnimatePresence>
 
-        {/* Notification dot */}
         {!isOpen && messages.length > 1 && (
           <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full border-2 border-white dark:border-neutral-900" />
         )}
