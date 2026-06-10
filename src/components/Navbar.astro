@@ -2,12 +2,19 @@
 import ThemeToggle from './ThemeToggle.astro';
 ---
 
-<header class="sticky top-0 z-50 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md border-b border-neutral-200/50 dark:border-neutral-800/50">
-	<nav class="container mx-auto px-4 py-4 max-w-4xl flex justify-between items-center">
-		<ul class="flex gap-6">
-			<li><a href="/" class="text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-neutral-50 transition-colors">Home</a></li>
-			<li><a href="/blog" class="text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-neutral-50 transition-colors">Blog</a></li>
-		</ul>
-		<ThemeToggle />
+<header class="fixed top-0 left-0 right-0 z-50 bg-white/70 dark:bg-neutral-950/70 backdrop-blur-md border-b border-neutral-200/50 dark:border-neutral-800/50">
+	<nav class="mx-auto px-6 max-w-6xl h-16 flex items-center justify-between">
+		<a href="/" class="text-lg font-semibold tracking-tight text-neutral-900 dark:text-neutral-50">
+			Ghozi Fidaul
+		</a>
+		<div class="flex items-center gap-8">
+			<ul class="flex items-center gap-6">
+				<li><a href="/" class="text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-50 transition-colors">Home</a></li>
+				<li><a href="/blog" class="text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-50 transition-colors">Blog</a></li>
+				<li><a href="#experience" class="text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-50 transition-colors">Experience</a></li>
+				<li><a href="#contact" class="text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-50 transition-colors">Contact</a></li>
+			</ul>
+			<ThemeToggle />
+		</div>
 	</nav>
 </header>
