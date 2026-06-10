@@ -1,13 +1,13 @@
 ---
 import '../styles/global.css';
+import '@fontsource-variable/geist/wght.css';
+import '@fontsource-variable/geist-mono/wght.css';
 import Navbar from '../components/Navbar.astro';
-import CursorFollower from '../components/CursorFollower.tsx';
 
 interface Props {
 	title?: string;
 	description?: string;
 	image?: string;
-	permalink?: string;
 	type?: 'website' | 'article';
 }
 
@@ -15,7 +15,6 @@ const {
 	title = 'Ghozi Fidaul',
 	description = 'Personal site of Ghozi Fidaul, a software engineer building modern web applications with clean code and creative solutions.',
 	image = '/ss-personal-site.webp',
-	permalink = new URL(Astro.url.pathname, Astro.site).href,
 	type = 'website',
 } = Astro.props;
 
@@ -33,26 +32,26 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
 		<meta name="generator" content={Astro.generator} />
 		<link rel="canonical" href={canonicalURL} />
 		<link rel="sitemap" href="/sitemap-index.xml" />
-		
+
 		<meta name="description" content={description} />
 		<meta name="author" content="Ghozi Fidaul" />
 		<meta name="keywords" content="Ghozi Fidaul, software engineer, web development, programming, portfolio, blog" />
 		<meta name="robots" content="index, follow" />
-		
+
 		<meta property="og:title" content={pageTitle} />
 		<meta property="og:description" content={description} />
 		<meta property="og:image" content={new URL(image, Astro.site)} />
 		<meta property="og:url" content={canonicalURL} />
 		<meta property="og:type" content={type} />
 		<meta property="og:site_name" content={siteTitle} />
-		
+
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:title" content={pageTitle} />
 		<meta name="twitter:description" content={description} />
 		<meta name="twitter:image" content={new URL(image, Astro.site)} />
-		
+
 		<title>{pageTitle}</title>
-		
+
 		<script is:inline>
 			const theme = localStorage.getItem('theme');
 			if (theme) {
@@ -63,7 +62,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
 		</script>
 	</head>
 	<body class="min-h-screen">
-		<CursorFollower client:only="react" />
 		<Navbar />
 		<slot />
 		<script is:inline>
