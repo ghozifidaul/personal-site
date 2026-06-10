@@ -21,69 +21,49 @@ const posts = allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueO
 			author: 'Ghozi Fidaul',
 		}}
 	/>
-	<main class="container mx-auto px-4 py-8 max-w-4xl">
-		<section class="py-12">
-			<h1 class="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-neutral-900 to-neutral-600 dark:from-neutral-50 dark:to-neutral-400 bg-clip-text text-transparent">
+	<main class="mx-auto px-6 max-w-4xl pt-32 pb-24">
+		<section class="mb-16">
+			<h1 class="text-4xl md:text-5xl font-bold tracking-tighter text-neutral-900 dark:text-neutral-50 mb-4">
 				Blog
 			</h1>
-			<p class="text-lg text-neutral-700 dark:text-neutral-300 mb-8">
+			<p class="text-neutral-600 dark:text-neutral-400">
 				Thoughts, tutorials, and insights about software development.
 			</p>
 		</section>
 
-		<section class="py-12">
-			<div class="space-y-8">
+		<section>
+			<div class="space-y-6">
 				{posts.map((post) => (
-					<article class="border border-neutral-300 dark:border-neutral-700 p-6 rounded-lg hover:border-neutral-500 dark:hover:border-neutral-500 transition-all hover:scale-105 hover:shadow-lg blog-card">
-						<div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4">
-							<time datetime={post.data.date.toISOString()} class="text-sm text-neutral-600 dark:text-neutral-400">
-								{post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-							</time>
-							{post.data.tags.length > 0 && (
-								<div class="flex flex-wrap gap-2">
-									{post.data.tags.map((tag) => (
-										<span class="px-3 py-1 text-xs border border-neutral-300 dark:border-neutral-700 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-800 transition-colors">
-											{tag}
-										</span>
-									))}
-								</div>
-							)}
-						</div>
-						<h2 class="text-2xl font-bold mb-2 text-neutral-900 dark:text-neutral-50">
-							<a href={`/blog/${post.slug}`} class="hover:underline">
+					<article class="border border-neutral-200 dark:border-neutral-800 hover:border-neutral-300 dark:hover:border-neutral-700 transition-colors">
+						<a href={`/blog/${post.slug}`} class="block p-6">
+							<div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-3">
+								<time datetime={post.data.date.toISOString()} class="text-sm text-neutral-500 dark:text-neutral-400 font-mono">
+									{post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+								</time>
+								{post.data.tags.length > 0 && (
+									<div class="flex flex-wrap gap-2">
+										{post.data.tags.map((tag) => (
+											<span class="px-2.5 py-1 text-[11px] font-mono border border-neutral-200 dark:border-neutral-800 text-neutral-500 dark:text-neutral-400">
+												{tag}
+											</span>
+										))}
+									</div>
+								)}
+							</div>
+							<h2 class="text-xl font-semibold text-neutral-900 dark:text-neutral-50 mb-2 group-hover:text-neutral-600 dark:group-hover:text-neutral-300 transition-colors">
 								{post.data.title}
-							</a>
-						</h2>
-						<p class="text-neutral-700 dark:text-neutral-300 mb-4">
-							{post.data.description}
-						</p>
-						<a href={`/blog/${post.slug}`} class="text-neutral-600 dark:text-neutral-400 hover:underline hover:text-neutral-900 dark:hover:text-neutral-50 transition-colors">
-							Read more →
+							</h2>
+							<p class="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
+								{post.data.description}
+							</p>
 						</a>
 					</article>
 				))}
 			</div>
 		</section>
 
-		<footer class="py-8 border-t border-neutral-200 dark:border-neutral-800 text-center text-neutral-600 dark:text-neutral-400">
-			<p>&copy; 2025. Built with Astro, Tailwind, and Framer Motion.</p>
+		<footer class="pt-16 mt-16 border-t border-neutral-200 dark:border-neutral-800 text-center text-sm text-neutral-500 dark:text-neutral-400">
+			<p>&copy; {new Date().getFullYear()} Ghozi Fidaul</p>
 		</footer>
 	</main>
 </Layout>
-
-<style>
-	.blog-card:nth-child(1) { animation: fade-in 0.8s ease-out 0.2s both; }
-	.blog-card:nth-child(2) { animation: fade-in 0.8s ease-out 0.3s both; }
-	.blog-card:nth-child(3) { animation: fade-in 0.8s ease-out 0.4s both; }
-	.blog-card:nth-child(4) { animation: fade-in 0.8s ease-out 0.5s both; }
-	@keyframes fade-in {
-		from {
-			opacity: 0;
-			transform: translateY(30px);
-		}
-		to {
-			opacity: 1;
-			transform: translateY(0);
-		}
-	}
-</style>

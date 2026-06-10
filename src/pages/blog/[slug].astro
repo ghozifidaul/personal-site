@@ -36,32 +36,32 @@ const blogImage = data.image ? `/images/${data.image}` : '/ss-personal-site.webp
 			url: canonicalURL,
 		}}
 	/>
-	<main class="container mx-auto px-4 py-8 max-w-4xl">
-		<article class="py-12 blog-post">
-			<a href="/blog" class="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-50 transition-colors mb-8 inline-block">
-				← Back to Blog
+	<main class="mx-auto px-6 max-w-3xl pt-32 pb-24">
+		<article>
+			<a href="/blog" class="text-sm text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-50 transition-colors mb-12 inline-flex items-center gap-1">
+				&larr; Back to Blog
 			</a>
 
 			{data.image && (
 				<img
 					src={`/images/${data.image}`}
 					alt={data.title}
-					class="w-full rounded-lg mb-8 object-cover max-h-100"
+					class="w-full rounded-lg mb-10 object-cover max-h-96"
 				/>
 			)}
 
-			<header class="mb-8">
-				<h1 class="text-4xl md:text-6xl font-bold mb-4 text-neutral-900 dark:text-neutral-50">
+			<header class="mb-12">
+				<h1 class="text-3xl md:text-5xl font-bold tracking-tighter text-neutral-900 dark:text-neutral-50 mb-6">
 					{data.title}
 				</h1>
 				<div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-					<time datetime={data.date.toISOString()} class="text-neutral-600 dark:text-neutral-400">
+					<time datetime={data.date.toISOString()} class="text-sm text-neutral-500 dark:text-neutral-400 font-mono">
 						{data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
 					</time>
 					{data.tags && data.tags.length > 0 && (
 						<div class="flex flex-wrap gap-2">
 							{data.tags.map((tag: string) => (
-								<span class="px-3 py-1 text-xs border border-neutral-300 dark:border-neutral-700 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-800 transition-colors">
+								<span class="px-2.5 py-1 text-[11px] font-mono border border-neutral-200 dark:border-neutral-800 text-neutral-500 dark:text-neutral-400">
 									{tag}
 								</span>
 							))}
@@ -70,90 +70,196 @@ const blogImage = data.image ? `/images/${data.image}` : '/ss-personal-site.webp
 				</div>
 			</header>
 
-			<div class="prose prose-neutral dark:prose-invert max-w-none">
+			<div class="blog-content">
 				<Content />
 			</div>
 		</article>
 
-		<footer class="py-8 border-t border-neutral-200 dark:border-neutral-800 text-center text-neutral-600 dark:text-neutral-400">
-			<p>&copy; 2025. Built with Astro, Tailwind, and Framer Motion.</p>
+		<footer class="pt-16 mt-16 border-t border-neutral-200 dark:border-neutral-800 text-center text-sm text-neutral-500 dark:text-neutral-400">
+			<p>&copy; {new Date().getFullYear()} Ghozi Fidaul</p>
 		</footer>
 	</main>
 </Layout>
 
 <style>
-	.blog-post {
-		animation: fade-in 0.8s ease-out;
-	}
-	@keyframes fade-in {
-		from {
-			opacity: 0;
-			transform: translateY(30px);
-		}
-		to {
-			opacity: 1;
-			transform: translateY(0);
-		}
-	}
-	:global(.prose) {
-		font-size: 1.125rem;
+	.blog-content {
+		font-size: 1.0625rem;
 		line-height: 1.75;
+		color: var(--color-neutral-700);
 	}
-	:global(.prose h1) {
-		font-size: 2.25rem;
+
+	.dark .blog-content {
+		color: var(--color-neutral-300);
+	}
+
+	.blog-content :global(h1) {
+		font-size: 2rem;
 		font-weight: 700;
-		margin-top: 2rem;
+		margin-top: 2.5rem;
 		margin-bottom: 1rem;
+		color: var(--color-neutral-900);
 	}
-	:global(.prose h2) {
-		font-size: 1.875rem;
-		font-weight: 600;
-		margin-top: 1.75rem;
-		margin-bottom: 0.75rem;
+
+	.dark .blog-content :global(h1) {
+		color: var(--color-neutral-50);
 	}
-	:global(.prose h3) {
+
+	.blog-content :global(h2) {
 		font-size: 1.5rem;
 		font-weight: 600;
-		margin-top: 1.5rem;
+		margin-top: 2rem;
+		margin-bottom: 0.75rem;
+		color: var(--color-neutral-900);
+	}
+
+	.dark .blog-content :global(h2) {
+		color: var(--color-neutral-50);
+	}
+
+	.blog-content :global(h3) {
+		font-size: 1.25rem;
+		font-weight: 600;
+		margin-top: 1.75rem;
 		margin-bottom: 0.5rem;
+		color: var(--color-neutral-900);
 	}
-	:global(.prose p) {
-		margin-bottom: 1rem;
+
+	.dark .blog-content :global(h3) {
+		color: var(--color-neutral-50);
 	}
-	:global(.prose ul) {
-		list-style-type: disc;
+
+	.blog-content :global(p) {
+		margin-bottom: 1.25rem;
+	}
+
+	.blog-content :global(ul),
+	.blog-content :global(ol) {
 		padding-left: 1.5rem;
-		margin-bottom: 1rem;
+		margin-bottom: 1.25rem;
 	}
-	:global(.prose li) {
+
+	.blog-content :global(li) {
 		margin-bottom: 0.5rem;
 	}
-	:global(.prose a) {
-		color: inherit;
+
+	.blog-content :global(a) {
+		color: var(--color-neutral-900);
 		text-decoration: underline;
+		text-underline-offset: 2px;
 	}
-	:global(.prose pre) {
+
+	.dark .blog-content :global(a) {
+		color: var(--color-neutral-100);
+	}
+
+	.blog-content :global(a:hover) {
+		color: var(--color-neutral-600);
+	}
+
+	.dark .blog-content :global(a:hover) {
+		color: var(--color-neutral-400);
+	}
+
+	.blog-content :global(pre) {
 		background-color: var(--color-neutral-100);
-		dark:background-color: var(--color-neutral-900);
-		border: 1px solid var(--color-neutral-300);
-		dark:border: 1px solid var(--color-neutral-700);
-		padding: 1rem;
+		border: 1px solid var(--color-neutral-200);
+		padding: 1.25rem;
 		border-radius: 0.5rem;
 		overflow-x: auto;
-		margin-bottom: 1rem;
+		margin-bottom: 1.5rem;
+		font-size: 0.875rem;
+		line-height: 1.5;
 	}
-	:global(.prose code) {
+
+	.dark .blog-content :global(pre) {
+		background-color: var(--color-neutral-900);
+		border-color: var(--color-neutral-800);
+	}
+
+	.blog-content :global(code) {
 		background-color: var(--color-neutral-100);
-		dark:background-color: var(--color-neutral-900);
-		border: 1px solid var(--color-neutral-300);
-		dark:border: 1px solid var(--color-neutral-700);
+		border: 1px solid var(--color-neutral-200);
 		padding: 0.125rem 0.375rem;
 		border-radius: 0.25rem;
 		font-size: 0.875em;
+		font-family: "Geist Mono Variable", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 	}
-	:global(.prose pre code) {
+
+	.dark .blog-content :global(code) {
+		background-color: var(--color-neutral-900);
+		border-color: var(--color-neutral-800);
+	}
+
+	.blog-content :global(pre code) {
 		background-color: transparent;
 		border: none;
 		padding: 0;
+		font-size: inherit;
+	}
+
+	.blog-content :global(blockquote) {
+		border-left: 2px solid var(--color-neutral-300);
+		padding-left: 1rem;
+		margin: 1.5rem 0;
+		font-style: italic;
+		color: var(--color-neutral-600);
+	}
+
+	.dark .blog-content :global(blockquote) {
+		border-left-color: var(--color-neutral-700);
+		color: var(--color-neutral-400);
+	}
+
+	.blog-content :global(hr) {
+		border: none;
+		border-top: 1px solid var(--color-neutral-200);
+		margin: 2rem 0;
+	}
+
+	.dark .blog-content :global(hr) {
+		border-top-color: var(--color-neutral-800);
+	}
+
+	.blog-content :global(img) {
+		border-radius: 0.5rem;
+		margin: 1.5rem 0;
+		max-width: 100%;
+		height: auto;
+	}
+
+	.blog-content :global(strong) {
+		font-weight: 600;
+		color: var(--color-neutral-900);
+	}
+
+	.dark .blog-content :global(strong) {
+		color: var(--color-neutral-50);
+	}
+
+	.blog-content :global(table) {
+		width: 100%;
+		border-collapse: collapse;
+		margin: 1.5rem 0;
+	}
+
+	.blog-content :global(th),
+	.blog-content :global(td) {
+		border: 1px solid var(--color-neutral-200);
+		padding: 0.75rem;
+		text-align: left;
+	}
+
+	.dark .blog-content :global(th),
+	.dark .blog-content :global(td) {
+		border-color: var(--color-neutral-800);
+	}
+
+	.blog-content :global(th) {
+		font-weight: 600;
+		background-color: var(--color-neutral-100);
+	}
+
+	.dark .blog-content :global(th) {
+		background-color: var(--color-neutral-900);
 	}
 </style>
