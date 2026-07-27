@@ -75,3 +75,9 @@ body {
 		transition-duration: 0.01ms !important;
 	}
 }
+
+@media (hover: hover) and (pointer: fine) {
+	.group:hover .hover-only-translate-x-1 {
+		transform: translateX(0.25rem);
+	}
+}
