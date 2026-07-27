@@ -56,7 +56,7 @@ const markdownComponents = {
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="underline hover:text-accent transition-colors"
+      className="underline hover:text-accent transition-colors duration-200 ease-out"
     >
       {children}
     </a>
@@ -339,7 +339,7 @@ export default function AskAI() {
               initial={reduce ? false : { opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              transition={{ duration: 0.2, ease: 'easeOut' }}
+              transition={{ duration: 0.2, ease: [0.23, 1, 0.32, 1] }}
               className="absolute bottom-16 right-0 w-[380px] max-w-[calc(100vw-3rem)] z-50"
             >
               <div className="border border-neutral-700 bg-neutral-900 overflow-hidden shadow-2xl shadow-black/50">
@@ -358,14 +358,14 @@ export default function AskAI() {
                   <div className="flex items-center gap-1">
                     <button
                       onClick={clearChat}
-                      className="p-2 text-neutral-500 hover:text-neutral-50 transition-colors hover:bg-neutral-800 focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none"
+                      className="p-2 text-neutral-500 hover:text-neutral-50 transition-colors duration-200 ease-out hover:bg-neutral-800 focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none"
                       title="Clear conversation"
                     >
                       <TrashIcon size={16} />
                     </button>
                     <button
                       onClick={() => setIsOpen(false)}
-                      className="p-2 text-neutral-500 hover:text-neutral-50 transition-colors hover:bg-neutral-800 focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none"
+                      className="p-2 text-neutral-500 hover:text-neutral-50 transition-colors duration-200 ease-out hover:bg-neutral-800 focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none"
                       aria-label="Close chat"
                     >
                       <XIcon size={16} />
@@ -379,7 +379,7 @@ export default function AskAI() {
                       key={`${message.timestamp}-${index}`}
                       initial={reduce ? false : { opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.2 }}
+                      transition={{ duration: 0.2, ease: [0.23, 1, 0.32, 1] }}
                       className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
                     >
                       <div
@@ -480,7 +480,7 @@ export default function AskAI() {
                     <button
                       onClick={handleSend}
                       disabled={!input.trim() || isLoading}
-                      className="bg-accent text-neutral-50 hover:bg-accent-light disabled:opacity-50 disabled:cursor-not-allowed px-3 py-2 transition-colors flex items-center justify-center focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-950 focus-visible:outline-none"
+                      className="bg-accent text-neutral-50 hover:bg-accent-light disabled:opacity-50 disabled:cursor-not-allowed px-3 py-2 transition-colors duration-200 ease-out flex items-center justify-center focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-950 focus-visible:outline-none"
                       aria-label="Send message"
                     >
                       <PaperPlaneRightIcon size={18} weight="bold" />
@@ -497,7 +497,7 @@ export default function AskAI() {
         onClick={() => setIsOpen(!isOpen)}
         whileHover={reduce ? undefined : { scale: 1.05 }}
         whileTap={reduce ? undefined : { scale: 0.95 }}
-        className={`relative w-14 h-14 flex items-center justify-center transition-colors z-50 shadow-2xl shadow-black/50 focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-950 focus-visible:outline-none ${
+        className={`relative w-14 h-14 flex items-center justify-center transition-colors duration-200 ease-out z-50 shadow-2xl shadow-black/50 focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-950 focus-visible:outline-none ${
           isOpen
             ? 'bg-neutral-700 text-neutral-50'
             : 'bg-accent text-neutral-50 hover:bg-accent-light'
@@ -511,7 +511,7 @@ export default function AskAI() {
               initial={reduce ? false : { rotate: -90, opacity: 0 }}
               animate={{ rotate: 0, opacity: 1 }}
               exit={{ rotate: 90, opacity: 0 }}
-              transition={{ duration: 0.2 }}
+              transition={{ duration: 0.2, ease: [0.23, 1, 0.32, 1] }}
             >
               <CaretDownIcon size={24} weight="bold" />
             </motion.div>
@@ -521,7 +521,7 @@ export default function AskAI() {
               initial={reduce ? false : { scale: 0.5, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.5, opacity: 0 }}
-              transition={{ duration: 0.2 }}
+              transition={{ duration: 0.2, ease: [0.23, 1, 0.32, 1] }}
             >
               <ChatCircleIcon size={24} weight="bold" />
             </motion.div>
