@@ -1,58 +1,77 @@
 @import "tailwindcss";
 
 @theme {
-  --color-neutral-50: #fafafa;
-  --color-neutral-100: #f5f5f5;
-  --color-neutral-200: #e5e5e5;
-  --color-neutral-300: #d4d4d4;
-  --color-neutral-400: #a3a3a3;
-  --color-neutral-500: #737373;
-  --color-neutral-600: #525252;
-  --color-neutral-700: #404040;
-  --color-neutral-800: #262626;
-  --color-neutral-900: #171717;
-  --color-neutral-950: #0a0a0a;
+	--color-neutral-50: #fafafa;
+	--color-neutral-100: #f5f5f5;
+	--color-neutral-200: #e5e5e5;
+	--color-neutral-300: #d4d4d4;
+	--color-neutral-400: #a3a3a3;
+	--color-neutral-500: #737373;
+	--color-neutral-600: #525252;
+	--color-neutral-700: #404040;
+	--color-neutral-800: #262626;
+	--color-neutral-900: #171717;
+	--color-neutral-950: #0a0a0a;
 
-  --font-family-sans: "Geist Variable", system-ui, sans-serif;
-  --font-family-mono: "Geist Mono Variable", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+	--color-accent: #C41E3A;
+	--color-accent-light: #E85D75;
+
+	--font-family-sans: "Geist Variable", system-ui, sans-serif;
+	--font-family-mono: "Geist Mono Variable", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
-@custom-variant dark (&:where(.dark, .dark *));
-
 html {
-  scroll-behavior: smooth;
+	scroll-behavior: smooth;
 }
 
 body {
-  font-family: var(--font-family-sans);
-  background-color: var(--color-neutral-50);
-  color: var(--color-neutral-900);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.dark body {
-  background-color: var(--color-neutral-950);
-  color: var(--color-neutral-50);
-}
-
-@layer base {
-  * {
-    @apply border-neutral-200;
-  }
-
-  .dark * {
-    @apply border-neutral-800;
-  }
+	font-family: var(--font-family-sans);
+	background-color: var(--color-neutral-950);
+	color: var(--color-neutral-50);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 ::selection {
-  background-color: var(--color-neutral-900);
-  color: var(--color-neutral-50);
+	background-color: var(--color-neutral-50);
+	color: var(--color-neutral-950);
 }
 
-.dark ::selection {
-  background-color: var(--color-neutral-50);
-  color: var(--color-neutral-900);
+@layer base {
+	* {
+		@apply border-neutral-800;
+	}
+}
+
+.swiss-heading {
+	text-wrap: balance;
+	letter-spacing: -0.04em;
+	line-height: 0.92;
+}
+
+.swiss-body {
+	text-wrap: pretty;
+	line-height: 1.6;
+}
+
+.noise-overlay {
+	pointer-events: none;
+	position: fixed;
+	inset: 0;
+	z-index: 100;
+	opacity: 0.04;
+	background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+
+	*, *::before, *::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+	}
 }

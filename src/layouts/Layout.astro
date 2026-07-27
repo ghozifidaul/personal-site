@@ -51,31 +51,13 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
 		<meta name="twitter:image" content={new URL(image, Astro.site)} />
 
 		<title>{pageTitle}</title>
-
-		<script is:inline>
-			const theme = localStorage.getItem('theme');
-			if (theme) {
-				document.documentElement.classList.add(theme);
-			} else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-				document.documentElement.classList.add('dark');
-			}
-		</script>
 	</head>
 	<body class="min-h-screen">
+		<a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[60] focus:px-4 focus:py-2 focus:bg-neutral-50 focus:text-neutral-950 focus:font-medium text-sm">
+			Skip to content
+		</a>
 		<Navbar />
+		<div class="noise-overlay" aria-hidden="true"></div>
 		<slot />
-		<script is:inline>
-			function toggleTheme() {
-				const html = document.documentElement;
-				if (html.classList.contains('dark')) {
-					html.classList.remove('dark');
-					localStorage.setItem('theme', 'light');
-				} else {
-					html.classList.add('dark');
-					localStorage.setItem('theme', 'dark');
-				}
-			}
-			window.toggleTheme = toggleTheme;
-		</script>
 	</body>
 </html>
