@@ -2,10 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import StructuredData from '../components/seo/StructuredData.astro';
-import ExperienceCard from '../components/ExperienceCard.astro';
 import AskAI from '../components/AskAI.tsx';
 import ScrollReveal from '../components/ScrollReveal.tsx';
-import { experiences } from '../data/experience';
 import { getCollection } from 'astro:content';
 
 const blogPosts = (await getCollection('blog'))
@@ -82,34 +80,11 @@ const blogPosts = (await getCollection('blog'))
 			</div>
 		</ScrollReveal>
 
-		<ScrollReveal as="section" id="experience" className="py-24 md:py-40 border-t border-neutral-900" client:load>
-			<div class="mx-auto px-6 md:px-8 max-w-6xl">
-				<div class="grid md:grid-cols-12 gap-12 md:gap-8 mb-16 md:mb-24">
-					<div class="md:col-span-4">
-						<p class="text-sm font-mono text-neutral-500 mb-3">02</p>
-						<h2 class="swiss-heading text-4xl md:text-5xl font-semibold text-neutral-50">
-							Experience
-						</h2>
-					</div>
-					<div class="md:col-span-8 lg:col-span-7 lg:col-start-6">
-						<p class="text-neutral-400 text-lg leading-relaxed max-w-xl">
-							A track record of shipping products across AI, web, and mobile — from early-stage prototypes to production systems used by thousands.
-						</p>
-					</div>
-				</div>
-				<div class="space-y-0">
-					{experiences.map((exp) => (
-						<ExperienceCard experience={exp} />
-					))}
-				</div>
-			</div>
-		</ScrollReveal>
-
 		<ScrollReveal as="section" id="writing" className="py-24 md:py-40 border-t border-neutral-900" client:load>
 			<div class="mx-auto px-6 md:px-8 max-w-6xl">
 				<div class="grid md:grid-cols-12 gap-12 md:gap-8 mb-16">
 					<div class="md:col-span-4">
-						<p class="text-sm font-mono text-neutral-500 mb-3">03</p>
+						<p class="text-sm font-mono text-neutral-500 mb-3">02</p>
 						<h2 class="swiss-heading text-4xl md:text-5xl font-semibold text-neutral-50">
 							Writing
 						</h2>
@@ -165,57 +140,14 @@ const blogPosts = (await getCollection('blog'))
 			</div>
 		</ScrollReveal>
 
-		<ScrollReveal as="section" id="contact" className="py-24 md:py-40 border-t border-neutral-900" client:load>
-			<div class="mx-auto px-6 md:px-8 max-w-6xl">
-				<div class="grid md:grid-cols-12 gap-12 md:gap-8">
-					<div class="md:col-span-4">
-						<p class="text-sm font-mono text-neutral-500 mb-3">04</p>
-						<h2 class="swiss-heading text-4xl md:text-5xl font-semibold text-neutral-50">
-							Contact
-						</h2>
-					</div>
-					<div class="md:col-span-8 lg:col-span-7 lg:col-start-6">
-						<p class="text-neutral-400 text-lg md:text-xl leading-relaxed max-w-xl mb-12">
-							Currently open to new opportunities and interesting challenges. Reach out directly.
-						</p>
-						<div class="space-y-4">
-							<a
-								href="mailto:ghozifidaul@gmail.com"
-								class="group flex items-center justify-between py-4 border-b border-neutral-800 hover:border-accent transition-colors"
-							>
-								<span class="text-2xl md:text-3xl font-medium text-neutral-50 group-hover:text-accent transition-colors">Email</span>
-								<span class="text-neutral-500 group-hover:text-accent group-hover:translate-x-1 transition-all">→</span>
-							</a>
-							<a
-								href="https://github.com/ghozifidaul"
-								target="_blank"
-								rel="noopener noreferrer"
-								class="group flex items-center justify-between py-4 border-b border-neutral-800 hover:border-accent transition-colors"
-							>
-								<span class="text-2xl md:text-3xl font-medium text-neutral-50 group-hover:text-accent transition-colors">GitHub</span>
-								<span class="text-neutral-500 group-hover:text-accent group-hover:translate-x-1 transition-all">↗</span>
-							</a>
-							<a
-								href="https://www.linkedin.com/in/ghozifidaul/"
-								target="_blank"
-								rel="noopener noreferrer"
-								class="group flex items-center justify-between py-4 border-b border-neutral-800 hover:border-accent transition-colors"
-							>
-								<span class="text-2xl md:text-3xl font-medium text-neutral-50 group-hover:text-accent transition-colors">LinkedIn</span>
-								<span class="text-neutral-500 group-hover:text-accent group-hover:translate-x-1 transition-all">↗</span>
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</ScrollReveal>
-
 		<footer class="py-8 border-t border-neutral-900">
 			<div class="mx-auto px-6 md:px-8 max-w-6xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4 text-sm text-neutral-500">
 				<p>Ghozi Fidaul — © {new Date().getFullYear()}</p>
 				<div class="flex items-center gap-6">
 					<a href="/" class="hover:text-neutral-50 transition-colors">Home</a>
 					<a href="/blog" class="hover:text-neutral-50 transition-colors">Blog</a>
+					<a href="/experience" class="hover:text-neutral-50 transition-colors">Experience</a>
+					<a href="/contact" class="hover:text-neutral-50 transition-colors">Contact</a>
 					<a href="https://github.com/ghozifidaul" target="_blank" rel="noopener noreferrer" class="hover:text-neutral-50 transition-colors">GitHub</a>
 				</div>
 			</div>
