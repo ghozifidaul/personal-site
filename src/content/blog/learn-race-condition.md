@@ -1,6 +1,6 @@
 ---
 title: "I Failed a Test Because of a Race Condition (So I Learned It Properly)"
-description: "Understanding what is race conditiong in react and how to handle it properly."
+description: "Understanding what a race condition is in React and how to handle it properly."
 date: 2026-02-11
 tags: ["react", "race condition", "javascript","technical test"]
 image: "blog/brianna-parks.webp"

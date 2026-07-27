@@ -21,9 +21,9 @@ export default function ScrollReveal({ children, className, as = 'div', delay = 
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{
-        duration: 0.6,
+        duration: 0.28,
         delay,
-        ease: [0.16, 1, 0.3, 1],
+        ease: [0.23, 1, 0.32, 1],
       }}
     >
       {children}

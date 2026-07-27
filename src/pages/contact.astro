@@ -1,0 +1,84 @@
+---
+import Layout from '../layouts/Layout.astro';
+import StructuredData from '../components/seo/StructuredData.astro';
+import ScrollReveal from '../components/ScrollReveal.tsx';
+---
+
+<Layout
+	title="Contact"
+	description="Get in touch with Ghozi Fidaul for opportunities, collaborations, and engineering projects."
+>
+	<StructuredData
+		type="WebSite"
+		data={{
+			name: 'Contact | Ghozi Fidaul',
+			url: new URL('/contact', Astro.site),
+			description: 'Get in touch with Ghozi Fidaul for opportunities, collaborations, and engineering projects.',
+		}}
+	/>
+
+	<main id="main" class="min-h-[80dvh] pt-32 pb-24">
+		<ScrollReveal as="section" className="mx-auto px-6 md:px-8 max-w-6xl mb-16 md:mb-24" client:load>
+			<div class="grid md:grid-cols-12 gap-8 md:gap-8">
+				<div class="md:col-span-8">
+					<p class="text-sm font-mono text-neutral-500 mb-4">Contact</p>
+					<h1 class="swiss-heading text-5xl md:text-7xl lg:text-8xl font-semibold text-neutral-50 mb-8">
+						Get in touch
+					</h1>
+					<p class="text-neutral-400 text-lg md:text-xl leading-relaxed max-w-xl">
+						Currently open to new opportunities and interesting challenges. Reach out directly.
+					</p>
+				</div>
+			</div>
+		</ScrollReveal>
+
+		<ScrollReveal as="section" className="mx-auto px-6 md:px-8 max-w-6xl" client:load>
+			<div class="grid md:grid-cols-12 gap-8 md:gap-8">
+				<div class="md:col-span-4 md:col-start-1">
+					<p class="text-sm font-mono text-neutral-500 mb-4">Channels</p>
+				</div>
+				<div class="md:col-span-8 lg:col-span-7">
+					<div class="space-y-4">
+						<a
+							href="mailto:ghozifidaul@gmail.com"
+							class="group flex items-center justify-between py-4 border-b border-neutral-800 hover:border-accent transition-colors duration-200 ease-out"
+						>
+							<span class="text-2xl md:text-3xl font-medium text-neutral-50 group-hover:text-accent transition-colors duration-200 ease-out">Email</span>
+							<span class="text-neutral-500 group-hover:text-accent transition-[transform,color] duration-200 ease-out group-hover:translate-x-1">→</span>
+						</a>
+						<a
+							href="https://github.com/ghozifidaul"
+							target="_blank"
+							rel="noopener noreferrer"
+							class="group flex items-center justify-between py-4 border-b border-neutral-800 hover:border-accent transition-colors duration-200 ease-out"
+						>
+							<span class="text-2xl md:text-3xl font-medium text-neutral-50 group-hover:text-accent transition-colors duration-200 ease-out">GitHub</span>
+							<span class="text-neutral-500 group-hover:text-accent transition-[transform,color] duration-200 ease-out group-hover:translate-x-1">↗</span>
+						</a>
+						<a
+							href="https://www.linkedin.com/in/ghozifidaul/"
+							target="_blank"
+							rel="noopener noreferrer"
+							class="group flex items-center justify-between py-4 border-b border-neutral-800 hover:border-accent transition-colors duration-200 ease-out"
+						>
+							<span class="text-2xl md:text-3xl font-medium text-neutral-50 group-hover:text-accent transition-colors duration-200 ease-out">LinkedIn</span>
+							<span class="text-neutral-500 group-hover:text-accent transition-[transform,color] duration-200 ease-out group-hover:translate-x-1">↗</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</ScrollReveal>
+
+		<footer class="py-8 mt-40 border-t border-neutral-900">
+			<div class="mx-auto px-6 md:px-8 max-w-6xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4 text-sm text-neutral-500">
+				<p>Ghozi Fidaul — © {new Date().getFullYear()}</p>
+				<div class="flex items-center gap-6">
+					<a href="/" class="hover:text-neutral-50 transition-colors duration-200 ease-out">Home</a>
+					<a href="/blog" class="hover:text-neutral-50 transition-colors duration-200 ease-out">Blog</a>
+					<a href="/experience" class="hover:text-neutral-50 transition-colors duration-200 ease-out">Experience</a>
+					<a href="https://github.com/ghozifidaul" target="_blank" rel="noopener noreferrer" class="hover:text-neutral-50 transition-colors duration-200 ease-out">GitHub</a>
+				</div>
+			</div>
+		</footer>
+	</main>
+</Layout>

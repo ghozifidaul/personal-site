@@ -8,7 +8,7 @@ import type { ChatMessage } from '../types/chat';
 
 const STORAGE_KEY = 'ask-ai-messages';
 const MAX_MESSAGES = 50;
-const API_URL = 'https://personal-site-be.ghozifidaul.workers.dev/chat'
+const API_URL = 'https://personal-site-be.ghozifidaul.workers.dev/chat';
 
 const WELCOME_MESSAGE: ChatMessage = {
   role: 'assistant',
@@ -42,11 +42,11 @@ const markdownComponents = {
   code: ({ children, className }: ComponentPropsWithoutRef<'code'>) => {
     const isInline = !className;
     return isInline ? (
-      <code className="px-1.5 py-0.5 bg-neutral-200 dark:bg-neutral-700 rounded text-xs font-mono">
+      <code className="px-1.5 py-0.5 bg-neutral-800 text-xs font-mono">
         {children}
       </code>
     ) : (
-      <pre className="p-3 bg-neutral-800 dark:bg-neutral-950 rounded-lg overflow-x-auto my-2">
+      <pre className="p-3 bg-neutral-950 border border-neutral-800 overflow-x-auto my-2">
         <code className="text-xs font-mono text-neutral-100">{children}</code>
       </pre>
     );
@@ -56,7 +56,7 @@ const markdownComponents = {
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="underline hover:text-neutral-600 dark:hover:text-neutral-300 transition-colors"
+      className="underline hover:text-accent transition-colors duration-200 ease-out"
     >
       {children}
     </a>
@@ -68,11 +68,11 @@ const markdownComponents = {
     <em className="italic">{children}</em>
   ),
   blockquote: ({ children }: ComponentPropsWithoutRef<'blockquote'>) => (
-    <blockquote className="border-l-2 border-neutral-400 dark:border-neutral-500 pl-3 my-2 italic">
+    <blockquote className="border-l-2 border-accent pl-3 my-2 italic">
       {children}
     </blockquote>
   ),
-  hr: () => <hr className="border-neutral-300 dark:border-neutral-600 my-3" />,
+  hr: () => <hr className="border-neutral-700 my-3" />,
 };
 
 export default function AskAI() {
@@ -331,7 +331,7 @@ export default function AskAI() {
               initial={reduce ? false : { opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/20 dark:bg-black/40 backdrop-blur-sm z-40"
+              className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40"
               onClick={() => setIsOpen(false)}
             />
 
@@ -339,18 +339,18 @@ export default function AskAI() {
               initial={reduce ? false : { opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              transition={{ duration: 0.2, ease: 'easeOut' }}
+              transition={{ duration: 0.2, ease: [0.23, 1, 0.32, 1] }}
               className="absolute bottom-16 right-0 w-[380px] max-w-[calc(100vw-3rem)] z-50"
             >
-              <div className="border border-neutral-300 dark:border-neutral-700 rounded-2xl bg-white dark:bg-neutral-900 overflow-hidden shadow-2xl">
-                <div className="flex items-center justify-between px-4 py-3 border-b border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-950">
+              <div className="border border-neutral-700 bg-neutral-900 overflow-hidden shadow-2xl shadow-black/50">
+                <div className="flex items-center justify-between px-4 py-3 border-b border-neutral-800 bg-neutral-950">
                   <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                    <div className="w-2 h-2 bg-accent" />
                     <div>
-                      <h3 className="font-medium text-neutral-900 dark:text-neutral-100 text-sm">
+                      <h3 className="font-medium text-neutral-50 text-sm">
                         Ask AI
                       </h3>
-                      <p className="text-xs text-neutral-500 dark:text-neutral-400">
+                      <p className="text-xs text-neutral-500">
                         Ask about Ghozi
                       </p>
                     </div>
@@ -358,14 +358,14 @@ export default function AskAI() {
                   <div className="flex items-center gap-1">
                     <button
                       onClick={clearChat}
-                      className="p-2 text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200 transition-colors rounded-lg hover:bg-neutral-200 dark:hover:bg-neutral-800"
+                      className="p-2 text-neutral-500 hover:text-neutral-50 transition-colors duration-200 ease-out hover:bg-neutral-800 focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none"
                       title="Clear conversation"
                     >
                       <TrashIcon size={16} />
                     </button>
                     <button
                       onClick={() => setIsOpen(false)}
-                      className="p-2 text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200 transition-colors rounded-lg hover:bg-neutral-200 dark:hover:bg-neutral-800"
+                      className="p-2 text-neutral-500 hover:text-neutral-50 transition-colors duration-200 ease-out hover:bg-neutral-800 focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none"
                       aria-label="Close chat"
                     >
                       <XIcon size={16} />
@@ -373,20 +373,20 @@ export default function AskAI() {
                   </div>
                 </div>
 
-                <div className="h-[400px] overflow-y-auto p-4 space-y-4 bg-white dark:bg-neutral-900">
+                <div className="h-[400px] overflow-y-auto p-4 space-y-4 bg-neutral-900">
                   {messages.map((message, index) => (
                     <motion.div
                       key={`${message.timestamp}-${index}`}
                       initial={reduce ? false : { opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.2 }}
+                      transition={{ duration: 0.2, ease: [0.23, 1, 0.32, 1] }}
                       className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
                     >
                       <div
                         className={`max-w-[90%] ${
                           message.role === 'user'
-                            ? 'bg-neutral-900 dark:bg-neutral-700 text-neutral-50 rounded-2xl rounded-br-md'
-                            : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 rounded-2xl rounded-bl-md'
+                            ? 'bg-accent text-neutral-50'
+                            : 'bg-neutral-800 text-neutral-50'
                         } px-4 py-3`}
                       >
                         {message.role === 'user' ? (
@@ -394,7 +394,7 @@ export default function AskAI() {
                             {message.content}
                           </p>
                         ) : (
-                          <div className="prose prose-sm dark:prose-invert max-w-none prose-neutral">
+                          <div className="prose prose-sm prose-invert max-w-none prose-neutral">
                             {(message as ChatMessage & { isStreaming?: boolean }).isStreaming ? (
                               <p className="text-sm leading-relaxed whitespace-pre-wrap">
                                 {message.content}
@@ -412,8 +412,8 @@ export default function AskAI() {
                         <span
                           className={`text-xs mt-2 block ${
                             message.role === 'user'
-                              ? 'text-neutral-400'
-                              : 'text-neutral-500 dark:text-neutral-400'
+                              ? 'text-neutral-200/70'
+                              : 'text-neutral-500'
                           }`}
                         >
                           {formatTime(message.timestamp)}
@@ -428,20 +428,20 @@ export default function AskAI() {
                       animate={{ opacity: 1, y: 0 }}
                       className="flex justify-start"
                     >
-                      <div className="bg-neutral-100 dark:bg-neutral-800 rounded-2xl rounded-bl-md px-4 py-3">
+                      <div className="bg-neutral-800 px-4 py-3">
                         <div className="flex gap-1">
                           <motion.span
-                            className="w-2 h-2 rounded-full bg-neutral-400 dark:bg-neutral-500"
+                            className="w-2 h-2 bg-neutral-500"
                             animate={reduce ? undefined : { y: [0, -6, 0] }}
                             transition={reduce ? undefined : { repeat: Infinity, duration: 0.6, delay: 0 }}
                           />
                           <motion.span
-                            className="w-2 h-2 rounded-full bg-neutral-400 dark:bg-neutral-500"
+                            className="w-2 h-2 bg-neutral-500"
                             animate={reduce ? undefined : { y: [0, -6, 0] }}
                             transition={reduce ? undefined : { repeat: Infinity, duration: 0.6, delay: 0.15 }}
                           />
                           <motion.span
-                            className="w-2 h-2 rounded-full bg-neutral-400 dark:bg-neutral-500"
+                            className="w-2 h-2 bg-neutral-500"
                             animate={reduce ? undefined : { y: [0, -6, 0] }}
                             transition={reduce ? undefined : { repeat: Infinity, duration: 0.6, delay: 0.3 }}
                           />
@@ -456,7 +456,7 @@ export default function AskAI() {
                       animate={{ opacity: 1 }}
                       className="flex justify-center"
                     >
-                      <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-300 rounded-lg px-4 py-2 text-sm max-w-[90%]">
+                      <div className="bg-neutral-900 border border-neutral-700 text-neutral-300 px-4 py-2 text-sm max-w-[90%]">
                         {error}
                       </div>
                     </motion.div>
@@ -465,7 +465,7 @@ export default function AskAI() {
                   <div ref={messagesEndRef} />
                 </div>
 
-                <div className="border-t border-neutral-300 dark:border-neutral-700 p-3 bg-neutral-50 dark:bg-neutral-950">
+                <div className="border-t border-neutral-800 p-3 bg-neutral-950">
                   <div className="flex gap-2">
                     <textarea
                       ref={textareaRef}
@@ -473,14 +473,14 @@ export default function AskAI() {
                       onChange={(e) => setInput(e.target.value)}
                       onKeyDown={handleKeyDown}
                       placeholder="Ask about Ghozi..."
-                      className="flex-1 bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-700 rounded-lg px-3 py-2 text-sm text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 dark:placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-neutral-400 dark:focus:ring-neutral-600 resize-none min-h-[40px] max-h-[100px]"
+                      className="flex-1 bg-neutral-900 border border-neutral-700 px-3 py-2 text-sm text-neutral-50 placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-accent resize-none min-h-[40px] max-h-[100px]"
                       rows={1}
                       disabled={isLoading}
                     />
                     <button
                       onClick={handleSend}
                       disabled={!input.trim() || isLoading}
-                      className="bg-neutral-900 dark:bg-neutral-50 text-neutral-50 dark:text-neutral-900 hover:bg-neutral-800 dark:hover:bg-neutral-200 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg px-3 py-2 transition-colors flex items-center justify-center"
+                      className="bg-accent text-neutral-50 hover:bg-accent-light disabled:opacity-50 disabled:cursor-not-allowed px-3 py-2 transition-colors duration-200 ease-out flex items-center justify-center focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-950 focus-visible:outline-none"
                       aria-label="Send message"
                     >
                       <PaperPlaneRightIcon size={18} weight="bold" />
@@ -497,10 +497,10 @@ export default function AskAI() {
         onClick={() => setIsOpen(!isOpen)}
         whileHover={reduce ? undefined : { scale: 1.05 }}
         whileTap={reduce ? undefined : { scale: 0.95 }}
-        className={`relative w-14 h-14 rounded-full shadow-2xl flex items-center justify-center transition-colors z-50 ${
+        className={`relative w-14 h-14 flex items-center justify-center transition-colors duration-200 ease-out z-50 shadow-2xl shadow-black/50 focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-950 focus-visible:outline-none ${
           isOpen
-            ? 'bg-neutral-700 dark:bg-neutral-300 text-neutral-50 dark:text-neutral-900'
-            : 'bg-neutral-900 dark:bg-neutral-50 text-neutral-50 dark:text-neutral-900'
+            ? 'bg-neutral-700 text-neutral-50'
+            : 'bg-accent text-neutral-50 hover:bg-accent-light'
         }`}
         aria-label={isOpen ? 'Close chat' : 'Open chat'}
       >
@@ -511,7 +511,7 @@ export default function AskAI() {
               initial={reduce ? false : { rotate: -90, opacity: 0 }}
               animate={{ rotate: 0, opacity: 1 }}
               exit={{ rotate: 90, opacity: 0 }}
-              transition={{ duration: 0.2 }}
+              transition={{ duration: 0.2, ease: [0.23, 1, 0.32, 1] }}
             >
               <CaretDownIcon size={24} weight="bold" />
             </motion.div>
@@ -521,7 +521,7 @@ export default function AskAI() {
               initial={reduce ? false : { scale: 0.5, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.5, opacity: 0 }}
-              transition={{ duration: 0.2 }}
+              transition={{ duration: 0.2, ease: [0.23, 1, 0.32, 1] }}
             >
               <ChatCircleIcon size={24} weight="bold" />
             </motion.div>
@@ -529,7 +529,7 @@ export default function AskAI() {
         </AnimatePresence>
 
         {!isOpen && messages.length > 1 && (
-          <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full border-2 border-white dark:border-neutral-900" />
+          <span className="absolute -top-1 -right-1 w-4 h-4 bg-neutral-50 border-2 border-neutral-950" />
         )}
       </motion.button>
     </div>
