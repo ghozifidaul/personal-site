@@ -2,9 +2,9 @@
 const pathname = Astro.url.pathname;
 const links = [
 	{ href: '/', label: 'Home' },
+	{ href: '/experience', label: 'Experience' },
 	{ href: '/blog', label: 'Blog' },
-	{ href: '/#experience', label: 'Experience' },
-	{ href: '/#contact', label: 'Contact' },
+	{ href: '/contact', label: 'Contact' },
 ];
 ---
 
@@ -15,7 +15,7 @@ const links = [
 		</a>
 		<ul class="hidden md:flex items-center gap-8">
 			{links.map((link) => {
-				const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href.replace('/#', '')));
+				const isActive = link.href === '/' ? pathname === '/' : pathname.startsWith(link.href);
 				return (
 					<li>
 						<a
