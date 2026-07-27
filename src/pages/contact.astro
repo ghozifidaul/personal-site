@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import StructuredData from '../components/seo/StructuredData.astro';
+import ScrollReveal from '../components/ScrollReveal.tsx';
 ---
 
 <Layout
@@ -17,7 +18,7 @@ import StructuredData from '../components/seo/StructuredData.astro';
 	/>
 
 	<main id="main" class="min-h-[80dvh] pt-32 pb-24">
-		<section class="mx-auto px-6 md:px-8 max-w-6xl mb-16 md:mb-24">
+		<ScrollReveal as="section" className="mx-auto px-6 md:px-8 max-w-6xl mb-16 md:mb-24" client:load>
 			<div class="grid md:grid-cols-12 gap-8 md:gap-8">
 				<div class="md:col-span-8">
 					<p class="text-sm font-mono text-neutral-500 mb-4">Contact</p>
@@ -29,9 +30,9 @@ import StructuredData from '../components/seo/StructuredData.astro';
 					</p>
 				</div>
 			</div>
-		</section>
+		</ScrollReveal>
 
-		<section class="mx-auto px-6 md:px-8 max-w-6xl">
+		<ScrollReveal as="section" className="mx-auto px-6 md:px-8 max-w-6xl" client:load>
 			<div class="grid md:grid-cols-12 gap-8 md:gap-8">
 				<div class="md:col-span-4 md:col-start-1">
 					<p class="text-sm font-mono text-neutral-500 mb-4">Channels</p>
@@ -40,42 +41,42 @@ import StructuredData from '../components/seo/StructuredData.astro';
 					<div class="space-y-4">
 						<a
 							href="mailto:ghozifidaul@gmail.com"
-							class="group flex items-center justify-between py-4 border-b border-neutral-800 hover:border-accent transition-colors"
+							class="group flex items-center justify-between py-4 border-b border-neutral-800 hover:border-accent transition-colors duration-200 ease-out"
 						>
-							<span class="text-2xl md:text-3xl font-medium text-neutral-50 group-hover:text-accent transition-colors">Email</span>
-							<span class="text-neutral-500 group-hover:text-accent group-hover:translate-x-1 transition-all">→</span>
+							<span class="text-2xl md:text-3xl font-medium text-neutral-50 group-hover:text-accent transition-colors duration-200 ease-out">Email</span>
+							<span class="text-neutral-500 group-hover:text-accent transition-[transform,color] duration-200 ease-out group-hover:translate-x-1">→</span>
 						</a>
 						<a
 							href="https://github.com/ghozifidaul"
 							target="_blank"
 							rel="noopener noreferrer"
-							class="group flex items-center justify-between py-4 border-b border-neutral-800 hover:border-accent transition-colors"
+							class="group flex items-center justify-between py-4 border-b border-neutral-800 hover:border-accent transition-colors duration-200 ease-out"
 						>
-							<span class="text-2xl md:text-3xl font-medium text-neutral-50 group-hover:text-accent transition-colors">GitHub</span>
-							<span class="text-neutral-500 group-hover:text-accent group-hover:translate-x-1 transition-all">↗</span>
+							<span class="text-2xl md:text-3xl font-medium text-neutral-50 group-hover:text-accent transition-colors duration-200 ease-out">GitHub</span>
+							<span class="text-neutral-500 group-hover:text-accent transition-[transform,color] duration-200 ease-out group-hover:translate-x-1">↗</span>
 						</a>
 						<a
 							href="https://www.linkedin.com/in/ghozifidaul/"
 							target="_blank"
 							rel="noopener noreferrer"
-							class="group flex items-center justify-between py-4 border-b border-neutral-800 hover:border-accent transition-colors"
+							class="group flex items-center justify-between py-4 border-b border-neutral-800 hover:border-accent transition-colors duration-200 ease-out"
 						>
-							<span class="text-2xl md:text-3xl font-medium text-neutral-50 group-hover:text-accent transition-colors">LinkedIn</span>
-							<span class="text-neutral-500 group-hover:text-accent group-hover:translate-x-1 transition-all">↗</span>
+							<span class="text-2xl md:text-3xl font-medium text-neutral-50 group-hover:text-accent transition-colors duration-200 ease-out">LinkedIn</span>
+							<span class="text-neutral-500 group-hover:text-accent transition-[transform,color] duration-200 ease-out group-hover:translate-x-1">↗</span>
 						</a>
 					</div>
 				</div>
 			</div>
-		</section>
+		</ScrollReveal>
 
 		<footer class="py-8 mt-40 border-t border-neutral-900">
 			<div class="mx-auto px-6 md:px-8 max-w-6xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4 text-sm text-neutral-500">
 				<p>Ghozi Fidaul — © {new Date().getFullYear()}</p>
 				<div class="flex items-center gap-6">
-					<a href="/" class="hover:text-neutral-50 transition-colors">Home</a>
-					<a href="/blog" class="hover:text-neutral-50 transition-colors">Blog</a>
-					<a href="/experience" class="hover:text-neutral-50 transition-colors">Experience</a>
-					<a href="https://github.com/ghozifidaul" target="_blank" rel="noopener noreferrer" class="hover:text-neutral-50 transition-colors">GitHub</a>
+					<a href="/" class="hover:text-neutral-50 transition-colors duration-200 ease-out">Home</a>
+					<a href="/blog" class="hover:text-neutral-50 transition-colors duration-200 ease-out">Blog</a>
+					<a href="/experience" class="hover:text-neutral-50 transition-colors duration-200 ease-out">Experience</a>
+					<a href="https://github.com/ghozifidaul" target="_blank" rel="noopener noreferrer" class="hover:text-neutral-50 transition-colors duration-200 ease-out">GitHub</a>
 				</div>
 			</div>
 		</footer>
