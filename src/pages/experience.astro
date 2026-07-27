@@ -1,0 +1,59 @@
+---
+import Layout from '../layouts/Layout.astro';
+import StructuredData from '../components/seo/StructuredData.astro';
+import ExperienceCard from '../components/ExperienceCard.astro';
+import ScrollReveal from '../components/ScrollReveal.tsx';
+import { experiences } from '../data/experience';
+---
+
+<Layout
+	title="Experience"
+	description="Professional experience of Ghozi Fidaul, a software engineer focused on AI products, full-stack web, and mobile development."
+>
+	<StructuredData
+		type="WebSite"
+		data={{
+			name: 'Experience | Ghozi Fidaul',
+			url: new URL('/experience', Astro.site),
+			description: 'Professional experience of Ghozi Fidaul, a software engineer focused on AI products, full-stack web, and mobile development.',
+		}}
+	/>
+
+	<main id="main" class="pt-32 pb-24">
+		<section class="mx-auto px-6 md:px-8 max-w-6xl mb-16 md:mb-24">
+			<div class="grid md:grid-cols-12 gap-8 md:gap-8 items-end">
+				<div class="md:col-span-8">
+					<p class="text-sm font-mono text-neutral-500 mb-4">Experience</p>
+					<h1 class="swiss-heading text-5xl md:text-7xl lg:text-8xl font-semibold text-neutral-50">
+						Selected work
+					</h1>
+				</div>
+				<div class="md:col-span-4">
+					<p class="text-neutral-400 leading-relaxed">
+						A track record of shipping products across AI, web, and mobile.
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<ScrollReveal as="section" className="mx-auto px-6 md:px-8 max-w-6xl" client:load>
+			<div class="space-y-0">
+				{experiences.map((exp) => (
+					<ExperienceCard experience={exp} />
+				))}
+			</div>
+		</ScrollReveal>
+
+		<footer class="py-8 mt-24 border-t border-neutral-900">
+			<div class="mx-auto px-6 md:px-8 max-w-6xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4 text-sm text-neutral-500">
+				<p>Ghozi Fidaul — © {new Date().getFullYear()}</p>
+				<div class="flex items-center gap-6">
+					<a href="/" class="hover:text-neutral-50 transition-colors">Home</a>
+					<a href="/blog" class="hover:text-neutral-50 transition-colors">Blog</a>
+					<a href="/contact" class="hover:text-neutral-50 transition-colors">Contact</a>
+					<a href="https://github.com/ghozifidaul" target="_blank" rel="noopener noreferrer" class="hover:text-neutral-50 transition-colors">GitHub</a>
+				</div>
+			</div>
+		</footer>
+	</main>
+</Layout>
