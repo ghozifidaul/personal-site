@@ -10,7 +10,7 @@ import { getCollection } from 'astro:content';
 
 const blogPosts = (await getCollection('blog'))
 	.sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
-	.slice(0, 2);
+	.slice(0, 3);
 ---
 
 <Layout
@@ -26,17 +26,20 @@ const blogPosts = (await getCollection('blog'))
 		}}
 	/>
 
-	<main>
+	<main id="main">
 		<Hero />
 
-		<ScrollReveal as="section" id="about" className="py-24 md:py-32" client:load>
-			<div class="mx-auto px-6 max-w-6xl">
-				<div class="grid md:grid-cols-2 gap-12 md:gap-16">
-					<div>
-						<h2 class="text-3xl md:text-4xl font-bold tracking-tighter text-neutral-900 dark:text-neutral-50 mb-6">
+		<ScrollReveal as="section" id="about" className="py-24 md:py-40 border-t border-neutral-900" client:load>
+			<div class="mx-auto px-6 md:px-8 max-w-6xl">
+				<div class="grid md:grid-cols-12 gap-12 md:gap-8">
+					<div class="md:col-span-4">
+						<p class="text-sm font-mono text-neutral-500 mb-3">01</p>
+						<h2 class="swiss-heading text-4xl md:text-5xl font-semibold text-neutral-50">
 							About
 						</h2>
-						<div class="space-y-4 text-neutral-600 dark:text-neutral-400 leading-relaxed">
+					</div>
+					<div class="md:col-span-8 lg:col-span-7 lg:col-start-6">
+						<div class="space-y-6 text-neutral-400 text-lg md:text-xl leading-relaxed max-w-2xl">
 							<p>
 								I'm an AI Product Engineer and Full-Stack Developer with experience spanning mobile, web, and AI systems. I specialize in building intelligent applications using Azure OpenAI, Next.js, and Python, with a focus on accessibility and user-centered design.
 							</p>
@@ -44,76 +47,117 @@ const blogPosts = (await getCollection('blog'))
 								My work includes architecting AI education assistants, developing cross-platform mobile apps for 20+ clients, and optimizing high-traffic retail systems. I combine technical expertise with product thinking to deliver solutions that make a real impact.
 							</p>
 						</div>
-					</div>
-					<div>
-						<h3 class="text-sm font-mono text-neutral-500 dark:text-neutral-400 mb-4 uppercase tracking-wider">
-							Technologies
-						</h3>
-						<div class="flex flex-wrap gap-2">
-							<span class="px-3 py-1.5 text-sm border border-neutral-200 dark:border-neutral-800 text-neutral-700 dark:text-neutral-300">Azure OpenAI</span>
-							<span class="px-3 py-1.5 text-sm border border-neutral-200 dark:border-neutral-800 text-neutral-700 dark:text-neutral-300">Python</span>
-							<span class="px-3 py-1.5 text-sm border border-neutral-200 dark:border-neutral-800 text-neutral-700 dark:text-neutral-300">LLMs</span>
-							<span class="px-3 py-1.5 text-sm border border-neutral-200 dark:border-neutral-800 text-neutral-700 dark:text-neutral-300">React</span>
-							<span class="px-3 py-1.5 text-sm border border-neutral-200 dark:border-neutral-800 text-neutral-700 dark:text-neutral-300">Next.js</span>
-							<span class="px-3 py-1.5 text-sm border border-neutral-200 dark:border-neutral-800 text-neutral-700 dark:text-neutral-300">Astro</span>
-							<span class="px-3 py-1.5 text-sm border border-neutral-200 dark:border-neutral-800 text-neutral-700 dark:text-neutral-300">React Native</span>
-							<span class="px-3 py-1.5 text-sm border border-neutral-200 dark:border-neutral-800 text-neutral-700 dark:text-neutral-300">Flutter</span>
-							<span class="px-3 py-1.5 text-sm border border-neutral-200 dark:border-neutral-800 text-neutral-700 dark:text-neutral-300">Node.js</span>
-							<span class="px-3 py-1.5 text-sm border border-neutral-200 dark:border-neutral-800 text-neutral-700 dark:text-neutral-300">Laravel</span>
-							<span class="px-3 py-1.5 text-sm border border-neutral-200 dark:border-neutral-800 text-neutral-700 dark:text-neutral-300">PostgreSQL</span>
-							<span class="px-3 py-1.5 text-sm border border-neutral-200 dark:border-neutral-800 text-neutral-700 dark:text-neutral-300">AWS</span>
-							<span class="px-3 py-1.5 text-sm border border-neutral-200 dark:border-neutral-800 text-neutral-700 dark:text-neutral-300">Azure</span>
+						<div class="mt-12">
+							<p class="text-sm font-mono text-neutral-500 mb-4">Technologies</p>
+							<div class="flex flex-wrap gap-x-4 gap-y-2 text-sm text-neutral-300">
+								<span>Azure OpenAI</span>
+								<span class="text-neutral-700">/</span>
+								<span>Python</span>
+								<span class="text-neutral-700">/</span>
+								<span>LLMs</span>
+								<span class="text-neutral-700">/</span>
+								<span>React</span>
+								<span class="text-neutral-700">/</span>
+								<span>Next.js</span>
+								<span class="text-neutral-700">/</span>
+								<span>Astro</span>
+								<span class="text-neutral-700">/</span>
+								<span>React Native</span>
+								<span class="text-neutral-700">/</span>
+								<span>Flutter</span>
+								<span class="text-neutral-700">/</span>
+								<span>Node.js</span>
+								<span class="text-neutral-700">/</span>
+								<span>Laravel</span>
+								<span class="text-neutral-700">/</span>
+								<span>PostgreSQL</span>
+								<span class="text-neutral-700">/</span>
+								<span>AWS</span>
+								<span class="text-neutral-700">/</span>
+								<span>Azure</span>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</ScrollReveal>
 
-		<ScrollReveal as="section" id="experience" className="py-24 md:py-32 bg-neutral-50/50 dark:bg-neutral-950/50" client:load>
-			<div class="mx-auto px-6 max-w-4xl">
-				<h2 class="text-3xl md:text-4xl font-bold tracking-tighter text-neutral-900 dark:text-neutral-50 mb-16">
-					Experience
-				</h2>
-				<div class="space-y-2">
-      {experiences.map((exp) => (
+		<ScrollReveal as="section" id="experience" className="py-24 md:py-40 border-t border-neutral-900" client:load>
+			<div class="mx-auto px-6 md:px-8 max-w-6xl">
+				<div class="grid md:grid-cols-12 gap-12 md:gap-8 mb-16 md:mb-24">
+					<div class="md:col-span-4">
+						<p class="text-sm font-mono text-neutral-500 mb-3">02</p>
+						<h2 class="swiss-heading text-4xl md:text-5xl font-semibold text-neutral-50">
+							Experience
+						</h2>
+					</div>
+					<div class="md:col-span-8 lg:col-span-7 lg:col-start-6">
+						<p class="text-neutral-400 text-lg leading-relaxed max-w-xl">
+							A track record of shipping products across AI, web, and mobile — from early-stage prototypes to production systems used by thousands.
+						</p>
+					</div>
+				</div>
+				<div class="space-y-0">
+					{experiences.map((exp) => (
 						<ExperienceCard experience={exp} />
 					))}
 				</div>
 			</div>
 		</ScrollReveal>
 
-		<ScrollReveal as="section" id="writing" className="py-24 md:py-32" client:load>
-			<div class="mx-auto px-6 max-w-6xl">
-				<div class="flex items-end justify-between mb-12">
-					<h2 class="text-3xl md:text-4xl font-bold tracking-tighter text-neutral-900 dark:text-neutral-50">
-						Writing
-					</h2>
-					<a href="/blog" class="text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-50 transition-colors">
-						View all posts &rarr;
-					</a>
+		<ScrollReveal as="section" id="writing" className="py-24 md:py-40 border-t border-neutral-900" client:load>
+			<div class="mx-auto px-6 md:px-8 max-w-6xl">
+				<div class="grid md:grid-cols-12 gap-12 md:gap-8 mb-16">
+					<div class="md:col-span-4">
+						<p class="text-sm font-mono text-neutral-500 mb-3">03</p>
+						<h2 class="swiss-heading text-4xl md:text-5xl font-semibold text-neutral-50">
+							Writing
+						</h2>
+					</div>
+					<div class="md:col-span-8 lg:col-span-7 lg:col-start-6 flex items-end">
+						<a href="/blog" class="text-sm font-medium text-neutral-400 hover:text-accent transition-colors">
+							View all posts →
+						</a>
+					</div>
 				</div>
+
 				{
 					blogPosts.length > 0 ? (
-						<div class="grid md:grid-cols-2 gap-8">
-							{blogPosts.map((post) => (
+						<div class="space-y-0">
+							{blogPosts.map((post, index) => (
 								<a
 									href={`/blog/${post.slug}`}
-									class="group block p-6 border border-neutral-200 dark:border-neutral-800 hover:border-neutral-300 dark:hover:border-neutral-700 transition-colors"
+									class="group grid md:grid-cols-12 gap-4 md:gap-8 py-8 border-t border-neutral-900 hover:bg-neutral-900/30 transition-colors -mx-4 px-4"
 								>
-									<p class="text-sm font-mono text-neutral-500 dark:text-neutral-400 mb-2">
-										{new Date(post.data.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
-									</p>
-									<h3 class="text-lg font-semibold text-neutral-900 dark:text-neutral-50 group-hover:text-neutral-600 dark:group-hover:text-neutral-300 transition-colors mb-2">
-										{post.data.title}
-									</h3>
-									<p class="text-sm text-neutral-600 dark:text-neutral-400 line-clamp-2">
-										{post.data.description}
-									</p>
+									<div class="md:col-span-1">
+										<span class="text-sm font-mono text-neutral-600">
+											{String(index + 1).padStart(2, '0')}
+										</span>
+									</div>
+									<div class="md:col-span-2">
+										<time datetime={post.data.date.toISOString()} class="text-sm font-mono text-neutral-500">
+											{new Date(post.data.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short' })}
+										</time>
+									</div>
+									<div class="md:col-span-6">
+										<h3 class="text-xl md:text-2xl font-medium text-neutral-50 group-hover:text-accent transition-colors mb-2">
+											{post.data.title}
+										</h3>
+										<p class="text-neutral-400 leading-relaxed max-w-lg">
+											{post.data.description}
+										</p>
+									</div>
+									<div class="md:col-span-3 flex md:justify-end">
+										<span class="text-sm font-medium text-neutral-500 group-hover:text-accent transition-colors flex items-center gap-1">
+											Read
+											<span class="group-hover:translate-x-1 transition-transform">→</span>
+										</span>
+									</div>
 								</a>
 							))}
 						</div>
 					) : (
-						<p class="text-neutral-500 dark:text-neutral-400">
+						<p class="text-neutral-500">
 							Nothing here yet. Check back soon.
 						</p>
 					)
@@ -121,54 +165,59 @@ const blogPosts = (await getCollection('blog'))
 			</div>
 		</ScrollReveal>
 
-		<ScrollReveal as="section" id="contact" className="py-24 md:py-32 bg-neutral-50/50 dark:bg-neutral-950/50" client:load>
-			<div class="mx-auto px-6 max-w-4xl text-center">
-				<h2 class="text-3xl md:text-4xl font-bold tracking-tighter text-neutral-900 dark:text-neutral-50 mb-6">
-					Get in Touch
-				</h2>
-				<p class="text-neutral-600 dark:text-neutral-400 max-w-lg mx-auto mb-10 leading-relaxed">
-					I'm currently open to new opportunities and interesting challenges. Feel free to reach out.
-				</p>
-				<div class="flex items-center justify-center gap-6">
-					<a
-						href="mailto:ghozifidaul@gmail.com"
-						class="inline-flex items-center gap-2 px-6 py-3 bg-neutral-900 dark:bg-neutral-50 text-neutral-50 dark:text-neutral-900 text-sm font-medium hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors"
-					>
-						<svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-							<path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
-						</svg>
-						<span>Email</span>
-					</a>
-					<a
-						href="https://github.com/ghozifidaul"
-						target="_blank"
-						rel="noopener noreferrer"
-						class="inline-flex items-center gap-2 px-6 py-3 border border-neutral-300 dark:border-neutral-700 text-neutral-900 dark:text-neutral-50 text-sm font-medium hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
-					>
-						<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-							<path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
-						</svg>
-						<span>GitHub</span>
-					</a>
-					<a
-						href="https://www.linkedin.com/in/ghozifidaul/"
-						target="_blank"
-						rel="noopener noreferrer"
-						class="inline-flex items-center gap-2 px-6 py-3 border border-neutral-300 dark:border-neutral-700 text-neutral-900 dark:text-neutral-50 text-sm font-medium hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
-					>
-						<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-							<path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-						</svg>
-						<span>LinkedIn</span>
-					</a>
+		<ScrollReveal as="section" id="contact" className="py-24 md:py-40 border-t border-neutral-900" client:load>
+			<div class="mx-auto px-6 md:px-8 max-w-6xl">
+				<div class="grid md:grid-cols-12 gap-12 md:gap-8">
+					<div class="md:col-span-4">
+						<p class="text-sm font-mono text-neutral-500 mb-3">04</p>
+						<h2 class="swiss-heading text-4xl md:text-5xl font-semibold text-neutral-50">
+							Contact
+						</h2>
+					</div>
+					<div class="md:col-span-8 lg:col-span-7 lg:col-start-6">
+						<p class="text-neutral-400 text-lg md:text-xl leading-relaxed max-w-xl mb-12">
+							Currently open to new opportunities and interesting challenges. Reach out directly.
+						</p>
+						<div class="space-y-4">
+							<a
+								href="mailto:ghozifidaul@gmail.com"
+								class="group flex items-center justify-between py-4 border-b border-neutral-800 hover:border-accent transition-colors"
+							>
+								<span class="text-2xl md:text-3xl font-medium text-neutral-50 group-hover:text-accent transition-colors">Email</span>
+								<span class="text-neutral-500 group-hover:text-accent group-hover:translate-x-1 transition-all">→</span>
+							</a>
+							<a
+								href="https://github.com/ghozifidaul"
+								target="_blank"
+								rel="noopener noreferrer"
+								class="group flex items-center justify-between py-4 border-b border-neutral-800 hover:border-accent transition-colors"
+							>
+								<span class="text-2xl md:text-3xl font-medium text-neutral-50 group-hover:text-accent transition-colors">GitHub</span>
+								<span class="text-neutral-500 group-hover:text-accent group-hover:translate-x-1 transition-all">↗</span>
+							</a>
+							<a
+								href="https://www.linkedin.com/in/ghozifidaul/"
+								target="_blank"
+								rel="noopener noreferrer"
+								class="group flex items-center justify-between py-4 border-b border-neutral-800 hover:border-accent transition-colors"
+							>
+								<span class="text-2xl md:text-3xl font-medium text-neutral-50 group-hover:text-accent transition-colors">LinkedIn</span>
+								<span class="text-neutral-500 group-hover:text-accent group-hover:translate-x-1 transition-all">↗</span>
+							</a>
+						</div>
+					</div>
 				</div>
 			</div>
 		</ScrollReveal>
 
-		<footer class="py-8 border-t border-neutral-200 dark:border-neutral-800">
-			<div class="mx-auto px-6 max-w-6xl flex items-center justify-between text-sm text-neutral-500 dark:text-neutral-400">
-				<p>&copy; {new Date().getFullYear()} Ghozi Fidaul</p>
-				<p>Built with Astro &amp; Tailwind</p>
+		<footer class="py-8 border-t border-neutral-900">
+			<div class="mx-auto px-6 md:px-8 max-w-6xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4 text-sm text-neutral-500">
+				<p>Ghozi Fidaul — © {new Date().getFullYear()}</p>
+				<div class="flex items-center gap-6">
+					<a href="/" class="hover:text-neutral-50 transition-colors">Home</a>
+					<a href="/blog" class="hover:text-neutral-50 transition-colors">Blog</a>
+					<a href="https://github.com/ghozifidaul" target="_blank" rel="noopener noreferrer" class="hover:text-neutral-50 transition-colors">GitHub</a>
+				</div>
 			</div>
 		</footer>
 
