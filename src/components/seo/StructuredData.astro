@@ -49,4 +49,4 @@ const schemas = {
 const schema = schemas[type];
 ---
 
-<script set:html={JSON.stringify(schema)} type="application/ld+json" />
+<script is:inline set:html={JSON.stringify(schema)} type="application/ld+json" />
