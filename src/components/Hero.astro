@@ -1,5 +1,6 @@
 ---
 import TypewriterName from './TypewriterName.tsx';
+import HeroImage from './HeroImage.tsx';
 ---
 
 <section class="min-h-[100dvh] flex items-end pb-16 md:pb-24 pt-32">
@@ -28,16 +29,11 @@ import TypewriterName from './TypewriterName.tsx';
 				</a>
 			</div>
 			<div class="md:col-span-4 lg:col-span-5 md:pb-4">
-				<figure class="relative bg-neutral-50 border border-neutral-800">
-					<img
-						src="/ghozi-black-n-white.webp"
-						alt="Portrait of Ghozi Fidaul"
-						loading="eager"
-						decoding="async"
-						class="w-full aspect-[4/5] object-cover grayscale contrast-110"
-					/>
-					<div class="absolute -bottom-3 -left-3 w-24 h-24 bg-accent hidden md:block" aria-hidden="true"></div>
-				</figure>
+				<HeroImage
+					src="/ghozi-black-n-white.webp"
+					alt="Portrait of Ghozi Fidaul"
+					client:load
+				/>
 			</div>
 		</div>
 	</div>
