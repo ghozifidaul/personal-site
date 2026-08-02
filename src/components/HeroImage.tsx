@@ -26,12 +26,28 @@ export default function HeroImage({ src, alt }: Props) {
       <motion.div
         className="absolute -bottom-3 -left-3 w-24 h-24 bg-accent hidden md:block"
         aria-hidden="true"
-        initial={reduce ? false : { opacity: 0, x: -32 }}
-        animate={{ opacity: 1, x: 0 }}
+        initial={reduce ? false : { opacity: 0, x: -32, scale: 0.85 }}
+        animate={{ opacity: 1, x: 0, scale: 1 }}
         transition={{
-          duration: 0.8,
-          delay: 0.8,
-          ease: [0.23, 1, 0.32, 1],
+          opacity: {
+            duration: 0.25,
+            delay: 0.8,
+            ease: 'easeOut',
+          },
+          x: {
+            type: 'spring',
+            stiffness: 300,
+            damping: 12,
+            mass: 0.75,
+            delay: 0.8,
+          },
+          scale: {
+            type: 'spring',
+            stiffness: 360,
+            damping: 14,
+            mass: 0.7,
+            delay: 0.8,
+          },
         }}
       />
     </figure>
