@@ -6,8 +6,8 @@ interface Props {
   className?: string;
 }
 
-const CHAR_INTERVAL = 75;
-const LINE_DELAY = 250;
+const CHAR_INTERVAL = 120;
+const LINE_DELAY = 400;
 const CURSOR_BLINK_INTERVAL = 530;
 const CURSOR_BLINK_COUNT = 3;
 
@@ -79,7 +79,7 @@ export default function TypewriterName({ lines, className }: Props) {
           {line.slice(0, visibleChars[index])}
           {index === cursorLine && !reduce && (
             <span
-              className={`inline-block w-[2px] h-[0.85em] bg-current align-middle ml-1 ${
+              className={`inline-block w-[2px] h-[0.85em] bg-current align-middle ml-1 transition-opacity duration-150 ease-in-out ${
                 cursorFading
                   ? 'opacity-0 transition-opacity duration-300'
                   : cursorVisible
