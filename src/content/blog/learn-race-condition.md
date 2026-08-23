@@ -1,11 +1,16 @@
 ---
-title: "I Failed a Test Because of a Race Condition (So I Learned It Properly)"
-description: "Understanding what a race condition is in React and how to handle it properly."
+title: I Failed a Test Because of a Race Condition (So I Learned It Properly)
+description: Understanding what a race condition is in React and how to handle it properly.
 date: 2026-02-11
-tags: ["react", "race condition", "javascript","technical test"]
-image: "blog/brianna-parks.webp"
+tags:
+  - react
+  - race condition
+  - javascript
+  - technical test
+image: blog/brianna-parks.webp
 ---
-*Photo by Brianna Parks on Unsplash*
+
+_Photo by Brianna Parks on Unsplash_
 
 A few weeks ago, I got a technical test question about **race conditions**.
 
@@ -23,7 +28,8 @@ So I went down the rabbit hole and learned one of the most common race condition
 
 This article is the result of that journey.
 
----
+***
+
 ## So… what is a race condition?
 
 A **race condition** happens when multiple async processes compete to update the same data.
@@ -35,7 +41,8 @@ This usually happens when dealing with **API calls**.
 
 Still sounds abstract? Let’s break it with code.
 
----
+***
+
 ## The innocent React code
 
 Look at this perfectly normal React component:
@@ -60,10 +67,12 @@ Looks harmless.
 
 This code is secretly plotting against you.
 
----
+***
+
 ## The bug that only appears in real life
 
 Imagine this timeline:
+
 1. Page loads → fetch **User 123**
 2. User clicks very fast → switch to **User 456**
 3. Now both requests are running at the same time 🏃‍♂️🏃‍♂️
@@ -81,20 +90,23 @@ Your UI just time-traveled backwards.
 
 This is a race condition.
 
----
+***
 
 ## How do we stop the chaos?
 
 There are two classic strategies:
+
 1. Ignore outdated requests
 2. Cancel outdated requests
 
 Let’s start with the easiest fix.
 
----
+***
+
 ## Solution #1 — Ignore outdated requests
 
 We basically tell React:
+
 > “Only the latest request is allowed to talk.”
 
 ```js
@@ -116,10 +128,12 @@ useEffect(() => {
 ### What’s happening here?
 
 React calls the cleanup function when:
+
 - the component unmounts, OR
 - the dependency (`userId`) changes
 
 So the timeline becomes:
+
 1. Fetch user 123 → flag = true
 2. userId changes → flag becomes false 🚫
 3. Old request finishes → ignored 🙅‍♂️
@@ -127,7 +141,8 @@ So the timeline becomes:
 
 Simple. Effective. Minimal drama.
 
----
+***
+
 ## Solution #2 — Cancel the request completely
 
 Instead of ignoring the old request, we **terminate it**.
@@ -158,27 +173,35 @@ When `userId` changes, the old request gets cancelled before it can cause troubl
 
 No race. No drama.
 
----
+***
 
 ## Which solution is better?
 
 ### Ignore outdated requests
+
 **Pros**
+
 - Super simple
 - Quick to implement
 
 **Cons**
+
 - Old requests still run in the background 💸
 - Wastes bandwidth & server resources
+
 ### Cancel outdated requests
+
 **Pros**
+
 - Better performance 🚀 
 - Less server load
 
 **Cons**
+
 - Slightly more complex
 
----
+***
+
 ## The “overprotective developer” solution
 
 Why choose one when you can choose **both**?
@@ -208,12 +231,13 @@ useEffect(() => {
 ```
 
 This gives you:
+
 - Cancelled requests ✅
 - Ignored outdated responses ✅
 - Peace of mind 🧘‍♂️
-    
 
----
+***
+
 ## Final thoughts
 
 Race conditions are sneaky.
@@ -224,4 +248,4 @@ And suddenly your UI is living in the past.
 
 Now you know how to stop that from happening 🙂
 
----
+***
