@@ -7,7 +7,7 @@ tags:
   - race condition
   - javascript
   - technical test
-image: blog/brianna-parks.webp
+image: /images/blog/brianna-parks.webp
 ---
 
 _Photo by Brianna Parks on Unsplash_
