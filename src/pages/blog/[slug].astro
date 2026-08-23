@@ -50,7 +50,7 @@ const blogImage = data.image ? `/images/${imagePath}` : '/ss-personal-site.webp'
 
 			{data.image && (
 				<img
-					src={`/images/${data.image}`}
+					src={`${data.image}`}
 					alt={data.title}
 					loading="eager"
 					decoding="async"
