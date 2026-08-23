@@ -16,7 +16,8 @@ const post = Astro.props.post as any;
 const { Content } = await post.render();
 const data = post.data;
 const canonicalURL = new URL(`/blog/${post.slug}`, Astro.site).href;
-const blogImage = data.image ? `/images/${data.image}` : '/ss-personal-site.webp';
+const imagePath = data.image?.replace(/^\/?(images\/)?/, '');
+const blogImage = data.image ? `/images/${imagePath}` : '/ss-personal-site.webp';
 ---
 
 <Layout
