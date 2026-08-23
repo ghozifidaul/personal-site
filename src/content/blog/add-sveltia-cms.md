@@ -1,8 +1,13 @@
 ---
-title: "I Wanted a CMS for My Static Site (So I Wrote Two Files)"
-description: "How I added Sveltia CMS to my Astro site with no server, no database, and no new repository."
+title: I Wanted a CMS for My Static Site (So I Wrote Two Files)
+description: How I added Sveltia CMS to my Astro site with no server, no database, and no new repository.
 date: 2026-08-23
-tags: ["astro", "sveltia cms", "static site", "git"]
+tags:
+  - astro
+  - sveltia cms
+  - static site
+  - git
+image: /images/blog/patrick-tomasso.webp
 ---
 
 My blog lives in a git repo. Markdown files, Astro builds it, Cloudflare deploys on push. It's boring and I love it.
@@ -17,11 +22,11 @@ So I wanted a CMS. But I gave myself three rules:
 
 That last rule killed most options before I even opened their docs.
 
----
+***
 
 ## The graveyard
 
-**Pages CMS** — you edit your repo through *their* website. Genuinely nice, genuinely zero code. But my content would be managed on someone else's domain forever. I wanted `/admin` on *my* site. Next.
+**Pages CMS** — you edit your repo through _their_ website. Genuinely nice, genuinely zero code. But my content would be managed on someone else's domain forever. I wanted `/admin` on _my_ site. Next.
 
 > "Fine, I'll just use Decap CMS. It's the classic. Everyone uses it."
 
@@ -35,7 +40,7 @@ In 2026. For a personal blog. Hard pass.
 
 I was close to giving up and hand-editing markdown forever.
 
----
+***
 
 ## The unlock
 
@@ -45,11 +50,11 @@ It's a modern rewrite of Decap (same config format, way better UI), and it suppo
 
 No OAuth app. No proxy server. You paste a **fine-grained PAT** into the login screen once, and the browser talks to the GitHub API directly.
 
-A fine-grained PAT is a GitHub token scoped to *specific repos* with *specific permissions*. Mine can read and write contents of exactly one repository: this site. If it ever leaks, the blast radius is one repo, and I revoke it in ten seconds.
+A fine-grained PAT is a GitHub token scoped to _specific repos_ with _specific permissions_. Mine can read and write contents of exactly one repository: this site. If it ever leaks, the blast radius is one repo, and I revoke it in ten seconds.
 
 The CMS itself is a single JavaScript file loaded from a CDN. It runs entirely in my browser. There is no backend. There was never a backend.
 
----
+***
 
 ## What it actually took
 
@@ -61,7 +66,7 @@ Two new files:
 <script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js"></script>
 ```
 
-`public/admin/config.yml` — ~50 lines describing two collections: my blog posts (matching the Zod schema I already had) and my experience data.
+`public/admin/config.yml` — \~50 lines describing two collections: my blog posts (matching the Zod schema I already had) and my experience data.
 
 That second collection forced the only structural change. Sveltia edits JSON/YAML, not TypeScript, and my experience entries lived in a `.ts` file. So the array moved to `experience.json`, and the old file became four lines:
 
@@ -78,7 +83,7 @@ One more one-liner: the CMS saves image paths like `/images/blog/photo.webp`, wh
 
 Total diff: five files, roughly 150 lines added. No dependencies installed. Site still builds to plain static HTML.
 
----
+***
 
 ## The gotchas (learned so you don't have to)
 
@@ -88,7 +93,7 @@ Total diff: five files, roughly 150 lines added. No dependencies installed. Site
 
 **Testing without committing is built in.** Add `local_backend: true` to the config, open the admin on localhost, and Sveltia asks for access to your project folder using the browser's File System Access API. Edits go straight to the real markdown files, Astro hot-reloads them, and nothing touches GitHub. Chrome/Edge only — Safari doesn't support the API.
 
----
+***
 
 ## The payoff
 
