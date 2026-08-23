@@ -5,7 +5,8 @@
       "company": "ACTUAL Inc",
       "period": "July 2026",
       "highlights": [
-        "- Building a web app for handling 360 images and 3D assets using React, NextJS, NestJS, and GraphQL"
+        "Building a web app for handling 360 images and 3D assets using React, NextJS, NestJS, and GraphQL.",
+        "Handling feature releases"
       ],
       "tags": [
         "ReactJs",
