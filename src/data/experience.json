@@ -1,6 +1,20 @@
 {
   "experiences": [
     {
+      "title": "Full Stack Engineer",
+      "company": "ACTUAL Inc",
+      "period": "July 2026",
+      "highlights": [
+        "- Building a web app for handling 360 images and 3D assets using React, NextJS, NestJS, and GraphQL"
+      ],
+      "tags": [
+        "ReactJs",
+        "NextJS",
+        "NestJS",
+        "GraphQL"
+      ]
+    },
+    {
       "title": "AI Product Engineer",
       "company": "DigitSense — AI Product Studio (Hong Kong, Remote)",
       "period": "Mar 2025 -- Present",
