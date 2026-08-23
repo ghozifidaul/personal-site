@@ -2,8 +2,8 @@
   "experiences": [
     {
       "title": "Full Stack Engineer",
-      "company": "ACTUAL Inc",
-      "period": "July 2026",
+      "company": "ACTUAL Inc — Virtual Reality Studio (Japan, Remote)",
+      "period": "July 2026 -- Present",
       "highlights": [
         "Building a web app for handling 360 images and 3D assets using React, NextJS, NestJS, and GraphQL.",
         "Handling feature releases"
@@ -18,7 +18,7 @@
     {
       "title": "AI Product Engineer",
       "company": "DigitSense — AI Product Studio (Hong Kong, Remote)",
-      "period": "Mar 2025 -- Present",
+      "period": "Mar 2025 -- Jan 2026",
       "highlights": [
         "Architected and deployed an AI Education Assistant using Azure OpenAI, streamlining learning workflows for students with disabilities using Python for LLM integration, Next.js for backend and frontend, and Radix UI.",
         "Engineered custom Speech-to-Text (STT) and Text-to-Speech (TTS) pipelines on Azure to enable seamless voice-controlled interactions.",
